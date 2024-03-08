@@ -1,1 +1,3 @@
 # Inventors
+
+Jasiri Dickson
