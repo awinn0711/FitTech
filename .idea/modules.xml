@@ -2,17 +2,12 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-<<<<<<< HEAD
-      <module fileurl="file://$PROJECT_DIR$/.idea/Inventors.iml" filepath="$PROJECT_DIR$/.idea/Inventors.iml" />
-=======
-<<<<<<< HEAD
-      <module fileurl="file://$PROJECT_DIR$/.idea/project-repo.iml" filepath="$PROJECT_DIR$/.idea/project-repo.iml" />
->>>>>>> 38a5aec987a28fbf0a1bad7bbd7e75da3e10be7b
-=======
-      <module fileurl="file://$PROJECT_DIR$/.idea/FinalProject.iml" filepath="$PROJECT_DIR$/.idea/FinalProject.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/project-repo.iml" filepath="$PROJECT_DIR$/.idea/project-repo.iml" />
->>>>>>> 97dddd5b2db290a00902886e23f1ac12ad4bc3d9
->>>>>>> db79a42b6ede8916894f348469718a9726fbdcf9
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/demo.iml" filepath="$PROJECT_DIR$/.idea/modules/demo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/demo.main.iml" filepath="$PROJECT_DIR$/.idea/modules/demo.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/demo.test.iml" filepath="$PROJECT_DIR$/.idea/modules/demo.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/untitled/demo.untitled.iml" filepath="$PROJECT_DIR$/.idea/modules/untitled/demo.untitled.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/untitled/demo.untitled.main.iml" filepath="$PROJECT_DIR$/.idea/modules/untitled/demo.untitled.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/untitled/demo.untitled.test.iml" filepath="$PROJECT_DIR$/.idea/modules/untitled/demo.untitled.test.iml" />
     </modules>
   </component>
 </project>
