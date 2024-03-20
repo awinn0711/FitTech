@@ -1,6 +1,6 @@
 package com.fitTech.demo.models;
 import jakarta.persistence.Entity;
 
-@Entity
+//@Entity
 public class User {
 }

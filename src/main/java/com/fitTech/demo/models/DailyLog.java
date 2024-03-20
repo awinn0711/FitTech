@@ -21,11 +21,13 @@ public class DailyLog {
     public LocalDate date;
 
 
-    public DailyLog() {};
-    public DailyLog (User user, Ingredient ingredient, LocalDate date) {
+    public DailyLog() {
+        this.date = LocalDate.now();
+    };
+    public DailyLog (User user, Ingredient ingredient) {
+        super();
         this.user = user;
         this.ingredient = ingredient;
-        this.date = date;
     };
 
     public int getId() {

@@ -4,7 +4,7 @@ import './App.css';
 function App() {
   return (
     <div className="App">
-        <h1>"Todays Date"</h1>
+        <DailyLog />
     </div>
   );
 }
