@@ -3,6 +3,7 @@ package com.fitTech.demo.controllers;
 import com.fitTech.demo.data.DailyLogRepository;
 import com.fitTech.demo.models.DailyLog;
 import com.fitTech.demo.models.DailyLogData;
+import com.fitTech.demo.models.Date;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -22,10 +23,10 @@ public class DailyLogController {
     @GetMapping()
     public DailyLog dailyLog() {
         DailyLog todaysLog;
-        LocalDate date = LocalDate.now();
-        Optional<DailyLog> result = Optional.ofNullable(DailyLogData.findByDate(date, dailyLogRepository.findAll()));
+        Date checkDate = new Date(LocalDate.now());
+        Optional<DailyLog> result = Optional.ofNullable(DailyLogData.findByDate(checkDate, dailyLogRepository.findAll()));
         if (result.isEmpty()) {
-            todaysLog = new DailyLog();
+            todaysLog = new DailyLog(checkDate);
             dailyLogRepository.save(todaysLog);
             return todaysLog;
         }else {

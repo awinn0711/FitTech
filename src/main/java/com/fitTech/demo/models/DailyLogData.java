@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 public class DailyLogData {
 
-public static DailyLog findByDate (LocalDate aDate, Iterable<DailyLog> allLogs) {
+public static DailyLog findByDate (Date aDate, Iterable<DailyLog> allLogs) {
     for (DailyLog log : allLogs) {
         if (log.getDate().equals(aDate)) {
             return log;
