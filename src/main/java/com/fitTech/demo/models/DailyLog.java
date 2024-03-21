@@ -19,7 +19,6 @@ public class DailyLog {
 //    @ManyToOne
     private User user;
 
-
     private List<Ingredient> ingredients;
 
     @OneToOne(cascade = CascadeType.ALL)
