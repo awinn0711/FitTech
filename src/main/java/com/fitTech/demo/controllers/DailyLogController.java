@@ -20,6 +20,7 @@ public class DailyLogController {
     @Autowired
     private DailyLogRepository dailyLogRepository;
 
+
     @GetMapping()
     public DailyLog dailyLog() {
         DailyLog todaysLog;

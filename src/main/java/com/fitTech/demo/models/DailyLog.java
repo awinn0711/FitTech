@@ -16,14 +16,15 @@ public class DailyLog {
     @GeneratedValue
     private int id;
 
-//    @ManyToOne
+    @ManyToOne
     private User user;
 
+    @ManyToMany
     private List<Ingredient> ingredients;
 
     @OneToOne(cascade = CascadeType.ALL)
     public Date date;
-//
+
 
     public DailyLog(Date date) {
         this.date = date;
