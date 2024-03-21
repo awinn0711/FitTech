@@ -5,6 +5,9 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/FitTech.iml" filepath="$PROJECT_DIR$/.idea/modules/FitTech.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/FitTech.main.iml" filepath="$PROJECT_DIR$/.idea/modules/FitTech.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/FitTech.test.iml" filepath="$PROJECT_DIR$/.idea/modules/FitTech.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/com.fitTech.FitTech.iml" filepath="$PROJECT_DIR$/.idea/modules/com.fitTech.FitTech.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/com.fitTech.FitTech.main.iml" filepath="$PROJECT_DIR$/.idea/modules/com.fitTech.FitTech.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/com.fitTech.FitTech.test.iml" filepath="$PROJECT_DIR$/.idea/modules/com.fitTech.FitTech.test.iml" />
     </modules>
   </component>
 </project>
