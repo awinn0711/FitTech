@@ -23,7 +23,7 @@ public class DailyLog {
 
     @OneToOne(cascade = CascadeType.ALL)
     public Date date;
-
+//
 
     public DailyLog(Date date) {
         this.date = date;
