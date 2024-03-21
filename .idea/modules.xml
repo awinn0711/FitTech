@@ -2,16 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/com.fitTech.demo.iml" filepath="$PROJECT_DIR$/.idea/modules/com.fitTech.demo.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/com.fitTech.demo.main.iml" filepath="$PROJECT_DIR$/.idea/modules/com.fitTech.demo.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/com.fitTech.demo.test.iml" filepath="$PROJECT_DIR$/.idea/modules/com.fitTech.demo.test.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/demo.iml" filepath="$PROJECT_DIR$/.idea/modules/demo.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/demo.main.iml" filepath="$PROJECT_DIR$/.idea/modules/demo.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/demo.test.iml" filepath="$PROJECT_DIR$/.idea/modules/demo.test.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/untitled/demo.untitled.iml" filepath="$PROJECT_DIR$/.idea/modules/untitled/demo.untitled.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/untitled/demo.untitled.main.iml" filepath="$PROJECT_DIR$/.idea/modules/untitled/demo.untitled.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/untitled/demo.untitled.test.iml" filepath="$PROJECT_DIR$/.idea/modules/untitled/demo.untitled.test.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/untitled/fitTech.demo.untitled.iml" filepath="$PROJECT_DIR$/.idea/modules/untitled/fitTech.demo.untitled.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/FitTech.iml" filepath="$PROJECT_DIR$/.idea/modules/FitTech.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/FitTech.main.iml" filepath="$PROJECT_DIR$/.idea/modules/FitTech.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/FitTech.test.iml" filepath="$PROJECT_DIR$/.idea/modules/FitTech.test.iml" />
     </modules>
   </component>
 </project>
