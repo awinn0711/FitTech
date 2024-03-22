@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("dailylog")
+@RequestMapping("/dailylog/")
 public class DailyLogController {
 
     @Autowired
