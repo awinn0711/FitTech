@@ -1,10 +1,16 @@
 package com.fitTech.demo.models;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Entity
 public class User {
+
+    @Id
+    @GeneratedValue
+    private int id;
 
     @NotNull
     private String username;
@@ -29,4 +35,3 @@ public class User {
         return encoder.matches(password, pwHash);
     }
 }
-
