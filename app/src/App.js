@@ -4,11 +4,14 @@ import Home from './Home';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 
+const baseUrl = process.env.REACT_APP_BASEURL;
+
+
 const App = () => {
   return (
     <Router>
       <Routes>
-        <Route exact path="/" element={<Home/>}/>
+        <Route exact path="/" element={<Home />}/>
 
       </Routes>
     </Router>
