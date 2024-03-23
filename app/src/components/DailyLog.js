@@ -6,14 +6,15 @@ export default function DailyLog() {
 
 //should fetch data from DailyLogController
     useEffect(() => {
-        fetch('<http://localhost:8080/dailylog>')
+        fetch('<http://localhost:8080/api/dailylog>')
           .then(response => response.json())
           .then(data => setDailyLog(data))
           .catch(error => console.error('Error fetching data:', error));
       }, []);
+      console.log(dailyLog);
 
 //As of now just attempting to return the current date as a header
     return (
-        <h1>{dailyLog.date}</h1>
+        <h1>{dailyLog.date.date}</h1>
     )
 }
