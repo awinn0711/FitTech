@@ -12,9 +12,14 @@ export default function DailyLog() {
           .catch(error => console.error('Error fetching data:', error));
       }, []);
       console.log(dailyLog);
+      let todaysDate;
+      todaysDate = dailyLog.date;
+      console.log(todaysDate);
+      let dateAsString;
+      dateAsString = String(todaysDate.date);
 
 //As of now just attempting to return the current date as a header
     return (
-        <h1>{dailyLog.date}</h1>
+        <h1>{dateAsString}</h1>
     )
 }

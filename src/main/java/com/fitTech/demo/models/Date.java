@@ -27,4 +27,9 @@ public class Date {
     public void setDate(LocalDate date) {
         this.date = date;
     }
+
+    @Override
+    public String toString() {
+        return date.toString();
+    }
 }
