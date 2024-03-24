@@ -1,38 +1,31 @@
-package com.fitTech.demo.models;
+package com.fitTech.demo.models.DTO;
 
-import jakarta.persistence.*;
+import com.fitTech.demo.models.Date;
+import com.fitTech.demo.models.Ingredient;
+import com.fitTech.demo.models.User;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
-import org.hibernate.annotations.JdbcTypeCode;
-import org.hibernate.type.SqlTypes;
 
-@Entity
-@Table(name = "log")
-public class DailyLog {
+public class DailyLogDTO {
 
-    @Id
-    @GeneratedValue
     private int id;
 
-    @ManyToOne
     private User user;
 
-    @ManyToMany
     private List<Ingredient> ingredients;
 
-    @OneToOne(cascade = CascadeType.ALL)
     public Date date;
 
-    public DailyLog(){};
-    public DailyLog(Date date) {
+    public DailyLogDTO(Date date) {
         this.date = date;
-    };
-    public DailyLog (User user) {
+    }
+    public DailyLogDTO(int id, User user, List<Ingredient> ingredients) {
         super();
+        this.id = id;
         this.user = user;
-    };
+        this.ingredients = ingredients;
+    }
 
     public int getId() {
         return id;
@@ -66,8 +59,8 @@ public class DailyLog {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        DailyLog dailyLog = (DailyLog) o;
-        return id == dailyLog.id;
+        DailyLogDTO that = (DailyLogDTO) o;
+        return id == that.id;
     }
 
     @Override
