@@ -24,6 +24,10 @@ dependencies {
 	runtimeOnly 'com.mysql:mysql-connector-j'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
+	// build.gradle
+
+	compile 'javax.servlet:javax.servlet-api:3.1.0'
+	compile 'com.auth0:mvc-auth-commons:1.+'
 }
 
 tasks.named('test') {
