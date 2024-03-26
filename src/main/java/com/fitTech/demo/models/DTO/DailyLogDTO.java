@@ -9,8 +9,6 @@ import java.util.Objects;
 
 public class DailyLogDTO {
 
-    private int id;
-
     private User user;
 
     private List<Ingredient> ingredients;
@@ -20,16 +18,13 @@ public class DailyLogDTO {
     public DailyLogDTO(Date date) {
         this.date = date;
     }
-    public DailyLogDTO(int id, User user, List<Ingredient> ingredients) {
+
+    public DailyLogDTO(User user, List<Ingredient> ingredients) {
         super();
-        this.id = id;
         this.user = user;
         this.ingredients = ingredients;
     }
 
-    public int getId() {
-        return id;
-    }
 
     public User getUser() {
         return user;
@@ -55,16 +50,4 @@ public class DailyLogDTO {
         this.date = date;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        DailyLogDTO that = (DailyLogDTO) o;
-        return id == that.id;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
 }

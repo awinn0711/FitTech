@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 export default function DailyLog() {
 
-    const [dailyLog, setDailyLog] = useState ([]);
+    const [dailyLog, setDailyLog] = useState ({});
 
 //should fetch data from DailyLogController
     useEffect(() => {
@@ -19,7 +19,12 @@ export default function DailyLog() {
       dateAsString = String(todaysDate.date);
 
 //As of now just attempting to return the current date as a header
-    return (
-        <h1>{dateAsString}</h1>
-    )
-}
+
+        const { data } = this.state;
+        if (!data) {
+            return <div>Loading...</div>;
+        }
+        return (
+            <h1>dateAsString</h1>
+        )
+};

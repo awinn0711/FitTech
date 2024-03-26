@@ -1,6 +1,7 @@
 package com.fitTech.demo.controllers;
 
 import com.fitTech.demo.data.DailyLogRepository;
+import com.fitTech.demo.models.DTO.DateDTO;
 import com.fitTech.demo.models.DailyLog;
 import com.fitTech.demo.models.DailyLogData;
 import com.fitTech.demo.models.Date;
@@ -27,15 +28,16 @@ public class DailyLogController {
     @GetMapping
     public ResponseEntity<DailyLog> dailyLog() {
         DailyLog todaysLog;
-        Date checkDate = new Date(LocalDate.now());
+        DateDTO checkDate = new DateDTO(LocalDate.now());
         Optional<DailyLog> result = Optional.ofNullable(DailyLogData.findByDate(checkDate, dailyLogRepository.findAll()));
         if (result.isEmpty()) {
-            todaysLog = new DailyLog(checkDate);
+            Date todaysDate = new Date(checkDate.getDate());
+            todaysLog = new DailyLog(todaysDate);
             dailyLogRepository.save(todaysLog);
             return new ResponseEntity<>(todaysLog, HttpStatus.CREATED);
         }else {
             todaysLog = result.get();
-            return ResponseEntity.ok(todaysLog);
+            return ResponseEntity.ok().body(todaysLog);
         }
     }
 
