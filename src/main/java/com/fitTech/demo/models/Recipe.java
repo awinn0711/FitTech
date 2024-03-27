@@ -1,11 +1,11 @@
 package com.fitTech.demo.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
+@Table(name = "recipe")
 public class Recipe {
 
     @Id
@@ -14,6 +14,7 @@ public class Recipe {
 
     private String name;
     private String description;
+    private List<Ingredient> ingredients;
 
     public Recipe() {
 
@@ -38,6 +39,14 @@ public class Recipe {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public List<Ingredient> getIngredients() {
+        return ingredients;
+    }
+
+    public void setIngredients(List<Ingredient> ingredients) {
+        this.ingredients = ingredients;
     }
 
     public int getRecipeId() {
