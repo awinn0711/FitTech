@@ -1,3 +1,18 @@
+#date {
+  text-align: center;
+  font-size: 100px;
+}
+
+.dailyLog {
+  background-color: lightgreen;
+}
+
+#calories {
+  text-align: left;
+  font-size: 50px;
+  margin-top: 100px;
+}
+
 .App {
   text-align: center;
 }
