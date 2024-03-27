@@ -27,6 +27,7 @@ public class DailyLogController {
 
     @GetMapping
     public ResponseEntity<DailyLog> dailyLog() {
+        //check if dailyLog object exists for current date. if so return it, if not, create new object
         DailyLog todaysLog;
         DateDTO checkDate = new DateDTO(LocalDate.now());
         Optional<DailyLog> result = Optional.ofNullable(DailyLogData.findByDate(checkDate, dailyLogRepository.findAll()));
