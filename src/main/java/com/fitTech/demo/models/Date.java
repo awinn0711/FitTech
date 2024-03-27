@@ -15,6 +15,7 @@ public class Date {
     
     private LocalDate date;
 
+    public Date(){};
     public Date(LocalDate date) {
         this.date = date;
     }
@@ -25,5 +26,10 @@ public class Date {
 
     public void setDate(LocalDate date) {
         this.date = date;
+    }
+
+    @Override
+    public String toString() {
+        return date.toString();
     }
 }
