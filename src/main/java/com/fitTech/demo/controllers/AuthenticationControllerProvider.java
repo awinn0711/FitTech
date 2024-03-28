@@ -1,5 +1,8 @@
 package com.fitTech.demo.controllers;
 
+import com.fitTech.demo.jwk.JwkProviderBuilder;
+import com.fitTech.demo.controllers.AuthenticationController;
+import com.fitTech.demo.jwk.JwkProvider;
 
 import jakarta.servlet.ServletConfig;
 
