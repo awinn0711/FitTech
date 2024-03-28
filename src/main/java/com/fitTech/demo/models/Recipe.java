@@ -14,6 +14,8 @@ public class Recipe {
 
     private String name;
     private String description;
+
+    @ManyToMany
     private List<Ingredient> ingredients;
 
     public Recipe() {
