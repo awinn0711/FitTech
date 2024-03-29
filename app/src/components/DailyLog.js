@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-
+//useState updates as it renders
 export default function DailyLog() {
 
     const [dailyLog, setDailyLog] = useState ({});
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(false); //conditional rendering
     const [date, setDate] = useState(null);
 
 //should fetch data from DailyLogController
@@ -24,8 +24,8 @@ export default function DailyLog() {
     //   }, []);
       
       async function fetchData() {
-        let response = await fetch("http://localhost:8080/api/dailylog");
-        let data = await response.json()
+        let response = await fetch("http://localhost:8080/api/dailylog"); //await returns promise to allow to receive data "after the fact". fetch url for controller you receiving data from
+        let data = await response.json() //convert response to json
         .then( data => {
             setDailyLog(data)
             let todaysDate = data.date.date
