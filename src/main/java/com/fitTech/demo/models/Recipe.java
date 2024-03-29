@@ -10,7 +10,7 @@ public class Recipe {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int recipeId;
+    private int id;
 
     private String name;
     private String description;
@@ -22,9 +22,10 @@ public class Recipe {
 
     }
 
-    public Recipe(String name, String description) {
+    public Recipe(String name, String description, List<Ingredient> ingredients) {
         this.name = name;
         this.description = description;
+        this.ingredients = ingredients;
     }
 
     public String getName() {
@@ -52,7 +53,7 @@ public class Recipe {
     }
 
     public int getRecipeId() {
-        return recipeId;
+        return id;
     }
 
 }
