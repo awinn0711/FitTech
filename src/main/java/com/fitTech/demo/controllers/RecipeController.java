@@ -11,8 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@CrossOrigin
 @RestController
-@RequestMapping("/recipes")
+@RequestMapping("/api/recipes")
 public class RecipeController {
 
     private RecipeRepository recipeRepository;
@@ -21,10 +22,11 @@ public class RecipeController {
         this.recipeRepository = recipeRepository;
     }
 
-    public List<Recipe> getAllRecipes() {
-        List<Recipe> result = new ArrayList<Recipe>();
-        recipeRepository.findAll().forEach(result::add);
-        return result;
+    @GetMapping
+    public ResponseEntity<List<Recipe>> recipes() {
+        List<Recipe> recipeList = new ArrayList<>();
+        recipeRepository.findAll().forEach(recipeList::add);
+        return ResponseEntity.ok().body(recipeList);
     }
 
     @GetMapping("/{id}")

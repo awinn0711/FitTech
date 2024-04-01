@@ -1,26 +1,51 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 //just testing to see if I can create a webpage
-const AddRecipe = () => {
-  return (
-    <div> Wow! A Webpage! </div>
-  )
+export default function AddRecipe() {
+
+    const [name, setName] = useState ("It's a me, Namio!");
+    const [loading, setLoading] = useState(true);
+
+    async function fetchData() {
+        let response = await fetch("http://localhost:8080/api/recipes");
+        let data = await response.json().then( data => {
+
+            // Setting React State From Retrieved Data
+            setLoading(false);
+            setName(data[0].name);
+        });
+    };
+
+    // Everything here is executed on page load
+    useEffect(() => {
+        fetchData();
+        // After data is retrieved, we can read it from the React State here
+    }, []);
+
+    if (loading) {
+        return (
+            <p>loading...</p>
+        )
+    } else {
+        return (
+            <p>{name}</p>
+        )
+    }
 }
 
-export default AddRecipe;
+// functional code I will start to integrate later
 
-//functional code I will start to integrate later
-
-//function AddRecipe() {
-//  const [name, setName] = useState('');
-//  const [description, setDescription] = useState('');
-//
-//
 //  return (
-//    <div>
-//        Add Recipe
-//    </div>
-//  );
+//    <form>
+//        <label>Enter food name:
+//            <input
+//                type="text"
+//                value={name}
+//                onChange={(e) => setName(e.target.value)}
+//            />
+//        </label>
+//    </form>
+//  )
 
 //  return (
 //    <div>
@@ -41,4 +66,3 @@ export default AddRecipe;
 //      </form>
 //    </div>
 //  );
-//}
