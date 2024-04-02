@@ -1,14 +1,20 @@
 package com.fitTech.demo;
+
+import com.auth0.AuthenticationController;
+import com.auth0.IdentityVerificationException;
+import com.auth0.SessionUtils;
+import com.auth0.Tokens;
+
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpServletRequest;
 import jakarta.servlet.ServletConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+//import jakarta.servlet.http.HttpServletRequest;
+//import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.ServletException;
-import com.fitTech.demo.SessionUtils;
-import com.fitTech.demo.Tokens;
-
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 
 public class CallbackServlet {
     @WebServlet(urlPatterns = {"/callback"})

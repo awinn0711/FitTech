@@ -1,9 +1,8 @@
 package com.fitTech.demo.controllers;
 
-import com.fitTech.demo.jwk.JwkProviderBuilder;
-import com.fitTech.demo.controllers.AuthenticationController;
+import com.auth0.AuthenticationController;
 import com.fitTech.demo.jwk.JwkProvider;
-
+import com.fitTech.demo.jwk.JwkProviderBuilder;
 import jakarta.servlet.ServletConfig;
 
 import java.io.UnsupportedEncodingException;
@@ -15,7 +14,7 @@ class AuthenticationControllerProvider {
     private static AuthenticationController INSTANCE;
 
     // if multiple threads may call this, synchronize this method and consider double locking
-    static AuthenticationController getInstance(ServletConfig config) throws UnsupportedEncodingException {
+    static <JwkProvider> AuthenticationController getInstance(ServletConfig config) throws UnsupportedEncodingException {
         if (INSTANCE == null) {
             String domain = config.getServletContext().getInitParameter("com.auth0.domain");
             String clientId = config.getServletContext().getInitParameter("com.auth0.clientId");
