@@ -1,8 +1,8 @@
 package com.fitTech.demo.controllers;
 
 import com.auth0.AuthenticationController;
-import com.fitTech.demo.jwk.JwkProvider;
-import com.fitTech.demo.jwk.JwkProviderBuilder;
+import com.auth0.jwk.JwkProvider;
+import com.auth0.jwk.JwkProviderBuilder;
 import jakarta.servlet.ServletConfig;
 
 import java.io.UnsupportedEncodingException;
@@ -25,9 +25,9 @@ class AuthenticationControllerProvider {
             }
 
             // JwkProvider required for RS256 tokens. If using HS256, do not use.
-            JwkProvider jwkProvider = new JwkProviderBuilder(domain).build();
+            JwkProvider jwkProvider = (JwkProvider) new JwkProviderBuilder(domain).build();
             INSTANCE = AuthenticationController.newBuilder(domain, clientId, clientSecret)
-                    .withJwkProvider(jwkProvider)
+                    .withJwkProvider((com.auth0.jwk.JwkProvider) jwkProvider)
                     .build();
         }
 

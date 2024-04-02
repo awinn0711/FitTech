@@ -36,7 +36,7 @@ public class LogoutServlet {
                     "https://%s/v2/logout?client_id=%s&returnTo=%s",
                     domain,
                     clientId,
-                    returnUrl
+                    returnUrl += "http://localhost:3000/login"
             );
             response.sendRedirect(logoutUrl);
         }
