@@ -1,21 +1,21 @@
 import React from 'react';
-import './App.css';
-import Home from './Home';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import AuthLogin from './components/authLogin';
+import AuthProfile from './components/authProfile';
+import AuthLogout from './components/authLogout';
 
+function App() {
 
-const baseUrl = process.env.REACT_APP_BASEURL;
+    return (
+    <>
+    <AuthLogin></AuthLogin>
 
+    <AuthLogout></AuthLogout>
 
-const App = () => {
-  return (
-    <Router>
-      <Routes>
-        <Route exact path="/" element={<Home />}/>
+    <AuthProfile></AuthProfile>
+    </>
 
-      </Routes>
-    </Router>
-  )
+    );
+
 }
 
 export default App;
