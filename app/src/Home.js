@@ -7,6 +7,7 @@ import DailyLog from './/components/DailyLog.js'
 const Home = () => {
   return (
     <div>
+      <h1>Welcome, User</h1>
         <DailyLog />
 
     </div>
