@@ -3,10 +3,9 @@ import './App.css';
 import Home from './Home';
 import AddRecipe from './AddRecipe';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-
-
-const baseUrl = process.env.REACT_APP_BASEURL;
-
+import AuthLogin from './components/authLogin';
+import AuthProfile from './components/authProfile';
+import AuthLogout from './components/authLogout';
 
 const App = () => {
   return (
@@ -16,7 +15,7 @@ const App = () => {
         <Route exact path="/recipes" element={<AddRecipe />} />
       </Routes>
     </Router>
-  )
+  );
 }
 
 export default App;
