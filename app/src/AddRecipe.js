@@ -21,6 +21,33 @@ export default function AddRecipe() {
         }
     };
 
+    const handleSaveRecipe = () => {
+        const recipeData = {
+            name: name,
+            description: description,
+            ingredientsList: ingredientsList
+        };
+
+        fetch('http://localhost:8080/api/recipes', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(recipeData),
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to save recipe');
+            }
+            console.log('Recipe saved successfully');
+            setName("");
+            setDescription("");
+            setIngredientsList([]);
+        })
+        .catch(error => {
+            console.error('Error saving recipe:', error.message);
+        });
+    };
 
     return (
         <div>
@@ -47,6 +74,7 @@ export default function AddRecipe() {
                     <button type="button" onClick={handleAddIngredient}>Add Ingredient</button>
                 </label>
                 <br />
+                <button type="button" onClick={handleSaveRecipe}>Save Recipe</button>
             </form>
         </div>
     );
