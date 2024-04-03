@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
-@CrossOrigin
+@CrossOrigin //bc frontend and backend are running on different servers, this annotation allows frontend to fetch data from another server
 @RestController
 @RequestMapping("/api/dailylog")
 public class DailyLogController {
