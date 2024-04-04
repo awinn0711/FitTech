@@ -13,6 +13,9 @@ const App = () => {
       <Routes>
         <Route exact path="/" element={<Home />}/>
         <Route exact path="/recipes" element={<AddRecipe />} />
+        <Route exact path="/login" element={<AuthLogin />} />
+        <Route exact path="/profile" element={<AuthProfile />} />
+        <Route exact path="/logout" element={<AuthLogout />} />
       </Routes>
     </Router>
   );

@@ -16,14 +16,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
-@CrossOrigin //bc frontend and backend are running on different servers, this annotation allows frontend to fetch data from another server
+@CrossOrigin(origins = "http://localhost:8080")//bc frontend and backend are running on different servers, this annotation allows frontend to fetch data from another server
 @RestController
 @RequestMapping("/api/dailylog")
 public class DailyLogController {
 
     @Autowired
     private DailyLogRepository dailyLogRepository;
-
 
     @GetMapping
     public ResponseEntity<DailyLog> dailyLog() {
