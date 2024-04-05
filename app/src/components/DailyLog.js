@@ -31,14 +31,13 @@ export default function DailyLog() {
             let todaysDate = data.date.date
             setDate(todaysDate)
             setLoading(false)
+            console.log(data);
             });
         };
 
       useEffect(() => {
         setLoading(true);
         fetchData();
-        console.log(dailyLog);
-        console.log(date);
       }, []);
       
 
