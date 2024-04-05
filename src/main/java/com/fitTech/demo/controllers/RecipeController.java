@@ -23,7 +23,7 @@ public class RecipeController {
         this.recipeRepository = recipeRepository;
     }
 
-    @GetMapping
+    @GetMapping("all")
     public ResponseEntity<List<Recipe>> recipes() {
         List<Recipe> recipeList = new ArrayList<>();
         recipeRepository.findAll().forEach(recipeList::add);
