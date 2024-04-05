@@ -7,6 +7,8 @@ import AuthLogin from './components/authLogin';
 import AuthProfile from './components/authProfile';
 import AuthLogout from './components/authLogout';
 
+const baseUrl = process.env.REACT_APP_BASEURL;
+
 const App = () => {
   return (
     <Router>
