@@ -23,8 +23,8 @@ export default function EditLog() {
     }
 
     const handleAddRecipeToLog = () => {
-        fetch('http://localhost:8080/api/dailylog/edit', {
-            method: 'PUT',
+        fetch('http://localhost:8080/api/dailylog/addRecipeToLog', {
+            method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
             },
