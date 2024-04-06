@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import EditLog from './EditLog';
 //useState updates as it renders
 export default function DailyLog() {
 
@@ -31,7 +32,7 @@ export default function DailyLog() {
             let todaysDate = data.date.date
             setDate(todaysDate)
             setLoading(false)
-            console.log(data);
+            console.log("today's log: ", data);
             });
         };
 
@@ -50,7 +51,7 @@ export default function DailyLog() {
             <div className='dailyLog'>
                 <h1 id ='date'>{date}</h1>
                 <div id='calories'>Today's Calories: </div>
-
+            <EditLog />
             </div>
         )
 };
