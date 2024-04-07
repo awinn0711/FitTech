@@ -6,6 +6,7 @@ export default function DailyLog() {
     const [dailyLog, setDailyLog] = useState ({});
     const [loading, setLoading] = useState(false); //conditional rendering
     const [date, setDate] = useState(null);
+    const [todaysRecipes, setTodaysRecipes] = useState([]);
 
 //should fetch data from DailyLogController
 
@@ -31,6 +32,8 @@ export default function DailyLog() {
             setDailyLog(data)
             let todaysDate = data.date.date
             setDate(todaysDate)
+            let recipeList = data.recipes
+            setTodaysRecipes(recipeList);
             setLoading(false)
             console.log("today's log: ", data);
             });
@@ -51,6 +54,10 @@ export default function DailyLog() {
             <div className='dailyLog'>
                 <h1 id ='date'>{date}</h1>
                 <div id='calories'>Today's Calories: </div>
+                <h2>Today's Meals: </h2>
+                <ul>{todaysRecipes.map((recipe) => (
+                    <li>{recipe.name}</li>
+                ))}</ul>
             <EditLog />
             </div>
         )
