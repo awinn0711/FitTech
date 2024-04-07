@@ -18,6 +18,9 @@ public class Recipe {
     @ManyToMany
     private List<Ingredient> ingredients;
 
+    @ManyToMany
+    private List<DailyLog> dailyLogs;
+
     public Recipe() {
 
     }
