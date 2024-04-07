@@ -1,6 +1,7 @@
 package com.fitTech.demo.controllers;
 
 import com.fitTech.demo.data.DailyLogRepository;
+import com.fitTech.demo.data.RecipeRepository;
 import com.fitTech.demo.models.DTO.DailyLogDTO;
 import com.fitTech.demo.models.DTO.DateDTO;
 import com.fitTech.demo.models.DTO.RecipeDTO;
@@ -26,6 +27,9 @@ public class DailyLogController {
     private DailyLogRepository dailyLogRepository;
 
     @Autowired
+    private RecipeRepository recipeRepository;
+
+    @Autowired
     private DailyLogService dailyLogService;
 
     @GetMapping
@@ -45,12 +49,19 @@ public class DailyLogController {
         }
     }
 
-    @PatchMapping("addRecipeToLog")
+    @PostMapping("addRecipeToLog")
     public ResponseEntity<DailyLog> addRecipeToLog(@RequestBody Recipe recipe) {
         DateDTO checkDate = new DateDTO(LocalDate.now());
         DailyLog log = dailyLogService.findByDate(checkDate);
-        dailyLogService.addRecipeToLog(log, recipe);
-        return ResponseEntity.ok(log);
+
+        Optional<Recipe> result = recipeRepository.findById(recipe.getId());
+        if(result.isEmpty()) {
+            throw new RuntimeException("Can't find recipe!");
+        }else {
+            Recipe recipeToAdd = result.get();
+            dailyLogService.addRecipeToLog(log, recipeToAdd);
+            return ResponseEntity.ok(log);
+        }
     }
 
 }

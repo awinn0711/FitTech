@@ -23,7 +23,7 @@ public class DailyLog {
     @ManyToMany
     private List<Ingredient> ingredients;
 
-    @ManyToMany(mappedBy = "dailyLogs")
+    @ManyToMany
     private List<Recipe> recipes;
 
     @OneToOne(cascade = CascadeType.ALL)

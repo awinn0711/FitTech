@@ -55,7 +55,7 @@ public class Recipe {
         this.ingredients = ingredients;
     }
 
-    public int getRecipeId() {
+    public int getId() {
         return id;
     }
 
