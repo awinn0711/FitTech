@@ -1,31 +1,22 @@
-package com.fitTech.demo.models;
+package com.fitTech.demo.models.DTO;
 
-import jakarta.persistence.*;
+import com.fitTech.demo.models.Ingredient;
+import jakarta.persistence.ManyToMany;
 
 import java.util.List;
 
-@Entity
-@Table(name = "recipe")
-public class Recipe {
-
-    @Id
-    @GeneratedValue
-    private int id;
+public class RecipeDTO {
 
     private String name;
     private String description;
 
-    @ManyToMany
     private List<Ingredient> ingredients;
 
-    @ManyToMany
-    private List<DailyLog> dailyLogs;
-
-    public Recipe() {
+    public RecipeDTO() {
 
     }
 
-    public Recipe(String name, String description, List<Ingredient> ingredients) {
+    public RecipeDTO(String name, String description, List<Ingredient> ingredients) {
         this.name = name;
         this.description = description;
         this.ingredients = ingredients;
@@ -54,9 +45,4 @@ public class Recipe {
     public void setIngredients(List<Ingredient> ingredients) {
         this.ingredients = ingredients;
     }
-
-    public int getId() {
-        return id;
-    }
-
 }

@@ -1,5 +1,6 @@
 package com.fitTech.demo.models;
 
+import com.fitTech.demo.models.DTO.RecipeDTO;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -22,8 +23,12 @@ public class DailyLog {
     @ManyToMany
     private List<Ingredient> ingredients;
 
+    @ManyToMany
+    private List<Recipe> recipes;
+
     @OneToOne(cascade = CascadeType.ALL)
     public Date date;
+
 
     public DailyLog(){};
     public DailyLog(Date date) {
@@ -52,6 +57,14 @@ public class DailyLog {
 
     public void setIngredients(List<Ingredient> ingredients) {
         this.ingredients = ingredients;
+    }
+
+    public List<Recipe> getRecipes() {
+        return recipes;
+    }
+
+    public void addRecipe(Recipe recipe) {
+        this.recipes.add(recipe);
     }
 
     public Date getDate() {
