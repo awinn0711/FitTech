@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { json } from 'react-router-dom';
 
 
-export default function EditLog() {
+export default function EditLog( {setRefresh, setRendered} ) {
 
     const [recipes, setRecipes] = useState([]);
     const [recipeToAdd, setRecipeToAdd] = useState({});
@@ -39,6 +39,8 @@ export default function EditLog() {
         .catch(error => {
             console.error('Error adding meal to log:', error.message);
         });
+        setRendered(false);
+        setRefresh(Math.random());
     };
     
 
