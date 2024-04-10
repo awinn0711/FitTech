@@ -7,6 +7,8 @@ export default function DailyLog() {
     const [loading, setLoading] = useState(false); //conditional rendering
     const [date, setDate] = useState(null);
     const [todaysRecipes, setTodaysRecipes] = useState([]);
+    const [refresh, setRefresh] = useState(0);
+    const [rendered, setRendered] = useState(false);
 
 //should fetch data from DailyLogController
 
@@ -42,7 +44,12 @@ export default function DailyLog() {
       useEffect(() => {
         setLoading(true);
         fetchData();
-      }, []);
+        const timer = setTimeout(() => { 
+            setRendered(true); 
+          }, 300); 
+       
+          return () => clearTimeout(timer); 
+      }, [rendered]);
       
 
 //As of now just attempting to return the current date as a header
@@ -55,10 +62,10 @@ export default function DailyLog() {
                 <h1 id ='date'>{date}</h1>
                 <div id='calories'>Today's Calories: </div>
                 <h2>Today's Meals: </h2>
-                <ul>{todaysRecipes.map((recipe) => (
+                {rendered && <ul>{todaysRecipes.map((recipe) => (
                     <li>{recipe.name}</li>
-                ))}</ul>
-            <EditLog />
+                ))}</ul>}
+            <EditLog setRefresh = {setRefresh} setRendered = {setRendered} />
             </div>
         )
 };
