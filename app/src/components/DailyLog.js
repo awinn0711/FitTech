@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from 'react';
+import EditLog from './EditLog';
 //useState updates as it renders
 export default function DailyLog() {
 
     const [dailyLog, setDailyLog] = useState ({});
     const [loading, setLoading] = useState(false); //conditional rendering
     const [date, setDate] = useState(null);
+    const [todaysRecipes, setTodaysRecipes] = useState([]);
+    const [refresh, setRefresh] = useState(0);
+    const [rendered, setRendered] = useState(false);
 
 //should fetch data from DailyLogController
 
@@ -30,16 +34,22 @@ export default function DailyLog() {
             setDailyLog(data)
             let todaysDate = data.date.date
             setDate(todaysDate)
+            let recipeList = data.recipes
+            setTodaysRecipes(recipeList);
             setLoading(false)
+            console.log("today's log: ", data);
             });
         };
 
       useEffect(() => {
         setLoading(true);
         fetchData();
-        console.log(dailyLog);
-        console.log(date);
-      }, []);
+        const timer = setTimeout(() => { 
+            setRendered(true); 
+          }, 300); 
+       
+          return () => clearTimeout(timer); 
+      }, [rendered]);
       
 
 //As of now just attempting to return the current date as a header
@@ -51,7 +61,11 @@ export default function DailyLog() {
             <div className='dailyLog'>
                 <h1 id ='date'>{date}</h1>
                 <div id='calories'>Today's Calories: </div>
-
+                <h2>Today's Meals: </h2>
+                {rendered && <ul>{todaysRecipes.map((recipe) => (
+                    <li>{recipe.name}</li>
+                ))}</ul>}
+            <EditLog setRefresh = {setRefresh} setRendered = {setRendered} />
             </div>
         )
 };

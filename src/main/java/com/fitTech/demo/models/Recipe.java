@@ -18,6 +18,9 @@ public class Recipe {
     @ManyToMany
     private List<Ingredient> ingredients;
 
+    @ManyToMany
+    private List<DailyLog> dailyLogs;
+
     public Recipe() {
 
     }
@@ -52,7 +55,7 @@ public class Recipe {
         this.ingredients = ingredients;
     }
 
-    public int getRecipeId() {
+    public int getId() {
         return id;
     }
 
