@@ -1,19 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
-//just testing to see if I can create a webpage
 export default function AddRecipe() {
-
-    const [name, setName] = useState ("");
+    const [name, setName] = useState("");
     const [description, setDescription] = useState("");
     const [ingredientsList, setIngredientsList] = useState([]);
     const [ingredientInput, setIngredientInput] = useState("");
-    //const [loading, setLoading] = useState(true);
+    const [errorMessage, setErrorMessage] = useState("");
+    const [successMessage, setSuccessMessage] = useState(""); // New state for success message
 
     const handleIngredientChange = (e) => {
         setIngredientInput(e.target.value);
     };
 
-    //handler checks if ingredientInput is empty, and if it isn't, adds the current value of ingredientInput to the ingredientsList array
     const handleAddIngredient = () => {
         if (ingredientInput !== "") {
             setIngredientsList([...ingredientsList, ingredientInput]);
@@ -22,6 +20,11 @@ export default function AddRecipe() {
     };
 
     const handleSaveRecipe = () => {
+        if (name.trim() === "" || description.trim() === "" || ingredientsList.length === 0) {
+            setErrorMessage('Please fill in all fields before saving the recipe');
+            return;
+        }
+
         const recipeData = {
             name: name,
             description: description,
@@ -43,15 +46,23 @@ export default function AddRecipe() {
             setName("");
             setDescription("");
             setIngredientsList([]);
+            setErrorMessage("");
+            setSuccessMessage("Recipe saved successfully!");
+            setTimeout(() => {
+                setSuccessMessage("");
+            }, 3000); //might remove timeout? not sure yet
         })
         .catch(error => {
             console.error('Error saving recipe:', error.message);
+            setErrorMessage("Error saving recipe. Please try again later.");
         });
     };
 
     return (
         <div>
             <h2>Add Recipe</h2>
+            {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
+            {successMessage && <p style={{ color: 'green' }}>{successMessage}</p>}
             <form>
                 <label>
                     Recipe Name:
@@ -78,66 +89,4 @@ export default function AddRecipe() {
             </form>
         </div>
     );
-
 }
-//    async function fetchData() {
-//        let response = await fetch("http://localhost:8080/api/recipes");
-//        let data = await response.json().then( data => {
-//
-//            // Setting React State From Retrieved Data
-//            setLoading(false);
-//            setName(data[0].name);
-//        });
-//    };
-//
-//    // Everything here is executed on page load
-//    useEffect(() => {
-//        fetchData();
-//        // After data is retrieved, we can read it from the React State here
-//    }, []);
-//
-//    if (loading) {
-//        return (
-//            <p>loading...</p>
-//        )
-//    } else {
-//        return (
-//            <p>{name}</p>
-//        )
-//    }
-
-// functional code I will start to integrate later
-
-//  return (
-//    <form>
-//        <label>Enter food name:
-//            <input
-//                type="text"
-//                value={name}
-//                onChange={(e) => setName(e.target.value)}
-//            />
-//        </label>
-//    </form>
-//  )
-
-//  return (
-//    <div>
-//      <h2>Add Recipe</h2>
-//      <form onSubmit={handleSubmit}>
-//        <div>
-//          <label>Name:
-//            <input type="text" value="testing testing testing" />
-//          </label>
-//        </div>
-//        <div>
-//          <label>Description:</label>
-//          <textarea
-//            value={description}
-//          />
-//        </div>
-//        <button type="submit">Add Recipe</button>
-//      </form>
-//    </div>
-//  );
-
-//////////////////////IT IS WORKING AT THIS POINT
