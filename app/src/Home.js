@@ -1,17 +1,17 @@
 import React from 'react';
 import './App.css';
 import { Link } from 'react-router-dom';
-// import { Button, Container } from 'reactstrap';
-import DailyLog from './/components/DailyLog.js'
+import Button from 'react-bootstrap/Button';
+import DailyLog from './components/DailyLogComponents/DailyLog.js'
 
 
 const Home = () => {
   return (
     <div>
       <h1>Welcome, User</h1>
-        <Link to="dailylog">View Today's Log</Link><br></br>
-        <Link to="recipes">Add a Recipe</Link><br></br>
-        <Link to="allrecipes">View All Recipes</Link>
+        <p><Link to="dailylog"><Button variant="primary">View Today's Log</Button></Link></p>
+        <p><Link to="recipes"><Button variant="primary">Add a Recipe</Button></Link></p>
+        <p><Link to="allrecipes"><Button variant="primary">View All Recipes</Button></Link></p>
     </div>
   );
 }
