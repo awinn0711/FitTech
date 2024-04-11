@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import EditLog from './EditLog';
+import DisplayDailyMeals from './DisplayDailyMeals';
+import Button from 'react-bootstrap/Button';
 //useState updates as it renders
 export default function DailyLog() {
 
@@ -9,6 +11,7 @@ export default function DailyLog() {
     const [todaysRecipes, setTodaysRecipes] = useState([]);
     const [refresh, setRefresh] = useState(0);
     const [rendered, setRendered] = useState(false);
+    const [removeMeals, setRemoveMeals] = useState(false);
 
 //should fetch data from DailyLogController
 
@@ -46,7 +49,7 @@ export default function DailyLog() {
         fetchData();
         const timer = setTimeout(() => { 
             setRendered(true); 
-          }, 300); 
+          }, 500); 
        
           return () => clearTimeout(timer); 
       }, [rendered]);
@@ -62,10 +65,9 @@ export default function DailyLog() {
                 <h1 id ='date'>{date}</h1>
                 <div id='calories'>Today's Calories: </div>
                 <h2>Today's Meals: </h2>
-                {rendered && <ul>{todaysRecipes.map((recipe) => (
-                    <li>{recipe.name}</li>
-                ))}</ul>}
-            <EditLog setRefresh = {setRefresh} setRendered = {setRendered} />
+                {rendered && <DisplayDailyMeals todaysRecipes={todaysRecipes}/>}
+                <Button variant="secondary">Remove Meal</Button>
+                <EditLog setRefresh = {setRefresh} setRendered = {setRendered} />
             </div>
         )
 };

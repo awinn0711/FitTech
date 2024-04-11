@@ -6,7 +6,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import AuthLogin from './components/authLogin';
 import AuthProfile from './components/authProfile';
 import AuthLogout from './components/authLogout';
-import DailyLog from './components/DailyLog';
+import DailyLog from './components/DailyLogComponents/DailyLog';
 import AllRecipes from './components/AllRecipes';
 
 
