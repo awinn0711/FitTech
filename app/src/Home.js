@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import DailyLog from './components/DailyLogComponents/DailyLog.js'
 import { useAuth0 } from "@auth0/auth0-react";
-import React from "react";
+import NavBar from './components/NavBar.js'
 
 const Home = () => {
 

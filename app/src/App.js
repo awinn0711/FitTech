@@ -8,7 +8,7 @@ import AuthProfile from './components/authProfile';
 import AuthLogout from './components/authLogout';
 import DailyLog from './components/DailyLogComponents/DailyLog';
 import AllRecipes from './components/AllRecipes';
-
+import NavBar from './components/NavBar.js'
 
 const baseUrl = process.env.REACT_APP_BASEURL;
 
