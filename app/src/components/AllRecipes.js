@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import Table from 'react-bootstrap/Table';
 
 export default function AllRecipes() {
     const [recipes, setRecipes] = useState([]);
@@ -31,12 +32,32 @@ export default function AllRecipes() {
         }
     };
 
-    const recipeList = recipes.map((recipe) => (
-        <li key={recipe.id}>
-            {recipe.name}
-            <button onClick={() => deleteRecipe(recipe.id)}>Delete</button>
-        </li>
-    ));
+    const recipeList = 
+       
+       <Table striped>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Ingredients</th>
+            <th>Calories</th>
+            <th>Delete Recipe</th>
+        </tr>
+        {recipes.map((recipe) => (
+            <tr key={recipe.id}>
+                <td>{recipe.name}</td>
+                <td>{recipe.description}</td>
+                <td>{recipe.ingr}</td>
+                <td>{recipe.calories}</td>
+                <button onClick={() => deleteRecipe(recipe.id)}>Delete</button>
+            </tr>
+        ))}
+       </Table>
+       
+    //    <li key={recipe.id}>
+    //         {recipe.name}
+    //         <button onClick={() => deleteRecipe(recipe.id)}>Delete</button>
+    //     </li>
+    ;
 
     if (loading) {
         return <p>Loading...</p>;

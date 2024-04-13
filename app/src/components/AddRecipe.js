@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import Button from 'react-bootstrap/Button';
+
 
 export default function AddRecipe() {
     const [name, setName] = useState("");
@@ -28,8 +30,9 @@ export default function AddRecipe() {
         const recipeData = {
             name: name,
             description: description,
-            ingredientsList: ingredientsList
+            ingr: ingredientsList
         };
+        console.log(recipeData);
 
         fetch('http://localhost:8080/api/recipes', {
             method: 'POST',
@@ -85,7 +88,7 @@ export default function AddRecipe() {
                     <button type="button" onClick={handleAddIngredient}>Add Ingredient</button>
                 </label>
                 <br />
-                <button type="button" onClick={handleSaveRecipe}>Save Recipe</button>
+                <p><Button variant='primary' onClick={handleSaveRecipe}>Save Recipe</Button></p>
             </form>
         </div>
     );
