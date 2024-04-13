@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
+import Table from 'react-bootstrap/Table';
 import { useAuth0 } from "@auth0/auth0-react";
 
 
@@ -27,6 +28,10 @@ export default function AddRecipe() {
             setIngredientInput("");
         }
     };
+
+    const handleRemoveItem = target => {
+        setIngredientsList(ingredientsList.filter(ingredient => ingredient !== target))
+    }
 
     const handleSaveRecipe = () => {
         if (name.trim() === "" || description.trim() === "" || ingredientsList.length === 0) {
@@ -85,13 +90,24 @@ export default function AddRecipe() {
                     <textarea value={description} onChange={(e) => setDescription(e.target.value)} />
                 </label>
                 <br />
+                    {(ingredientsList.length > 0) && 
+                        <Table>
+                            <thead>
+                                <tr>
+                                <th>Ingredients</th>
+                                <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {ingredientsList.map((ingredient, index) => (
+                                <tr key={index}><td>{ingredient}</td>
+                                    <td><Button variant='outline-danger' size='sm' onClick={() => handleRemoveItem(ingredient)}>Remove</Button></td>
+                                </tr>
+                            ))}
+                            </tbody>
+                        </Table>}
+                        
                 <label>
-                    Ingredients:
-                    <ul>
-                        {ingredientsList.map((ingredient, index) => (
-                            <li key={index}>{ingredient}</li>
-                        ))}
-                    </ul>
                     <input type='number' value={ingrAmount} onChange={(e) => setIngrAmount(e.target.value)} />
                     <select onChange={(e) => setIngrUnit(e.target.value)}>
                         <option value=" "> </option>
