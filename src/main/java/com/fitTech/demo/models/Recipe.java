@@ -16,8 +16,13 @@ public class Recipe {
 
     private String name;
     private String description;
+
     @JsonProperty("ingr")
     private ArrayList<String> ingr = new ArrayList<>();
+
+    @JsonProperty("userEmail")
+    private String userEmail;
+
     private int calories;
     private double gramsFat;
     private double gramsCarbs;

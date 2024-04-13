@@ -1,11 +1,17 @@
 import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
+import { useAuth0 } from "@auth0/auth0-react";
+
 
 
 export default function AddRecipe() {
+    const { user, isAuthenticated, isLoading } = useAuth0();
+
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
     const [ingredientsList, setIngredientsList] = useState([]);
+    const [ingrAmount, setIngrAmount] = useState(0);
+    const [ingrUnit, setIngrUnit] = useState("");
     const [ingredientInput, setIngredientInput] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
     const [successMessage, setSuccessMessage] = useState(""); // New state for success message
@@ -16,7 +22,8 @@ export default function AddRecipe() {
 
     const handleAddIngredient = () => {
         if (ingredientInput !== "") {
-            setIngredientsList([...ingredientsList, ingredientInput]);
+            let newIngredient = `${ingrAmount} ${ingrUnit} ${ingredientInput}`
+            setIngredientsList([...ingredientsList, newIngredient]);
             setIngredientInput("");
         }
     };
@@ -30,7 +37,8 @@ export default function AddRecipe() {
         const recipeData = {
             name: name,
             description: description,
-            ingr: ingredientsList
+            ingr: ingredientsList,
+            userEmail: user.email
         };
         console.log(recipeData);
 
@@ -84,6 +92,14 @@ export default function AddRecipe() {
                             <li key={index}>{ingredient}</li>
                         ))}
                     </ul>
+                    <input type='number' value={ingrAmount} onChange={(e) => setIngrAmount(e.target.value)} />
+                    <select onChange={(e) => setIngrUnit(e.target.value)}>
+                        <option value=" "> </option>
+                        <option value="grams">grams</option>
+                        <option value="oz">oz</option>
+                        <option value="lbs">lbs</option>
+                        <option value="serving">serving</option>
+                    </select>
                     <input type="text" value={ingredientInput} onChange={handleIngredientChange} />
                     <button type="button" onClick={handleAddIngredient}>Add Ingredient</button>
                 </label>
