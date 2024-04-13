@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import Home from './Home';
 import AddRecipe from './components/AddRecipe';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';

@@ -101,10 +101,10 @@ export default function AddRecipe() {
                         <option value="serving">serving</option>
                     </select>
                     <input type="text" value={ingredientInput} onChange={handleIngredientChange} />
-                    <button type="button" onClick={handleAddIngredient}>Add Ingredient</button>
+                    <Button variant='primary' onClick={handleAddIngredient}>Add Ingredient</Button>
                 </label>
                 <br />
-                <p><Button variant='primary' onClick={handleSaveRecipe}>Save Recipe</Button></p>
+                <p><Button variant='success' onClick={handleSaveRecipe}>Save Recipe</Button></p>
             </form>
         </div>
     );

@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Table from 'react-bootstrap/Table';
+import Button from 'react-bootstrap/Button';
+import Spinner from 'react-bootstrap/Spinner';
 
 export default function AllRecipes() {
     const [recipes, setRecipes] = useState([]);
@@ -34,7 +36,7 @@ export default function AllRecipes() {
 
     const recipeList = 
        
-       <Table striped>
+       <Table striped bordered hover>
         <tr>
             <th>Name</th>
             <th>Description</th>
@@ -42,28 +44,29 @@ export default function AllRecipes() {
             <th>Calories</th>
             <th>Delete Recipe</th>
         </tr>
+        <tbody>
         {recipes.map((recipe) => (
             <tr key={recipe.id}>
                 <td>{recipe.name}</td>
                 <td>{recipe.description}</td>
                 <td>{recipe.ingr}</td>
                 <td>{recipe.calories}</td>
-                <button onClick={() => deleteRecipe(recipe.id)}>Delete</button>
+                <Button variant='outline-danger' size='sm' onClick={() => deleteRecipe(recipe.id)}>Delete</Button>
             </tr>
         ))}
+        </tbody>
        </Table>
-       
-    //    <li key={recipe.id}>
-    //         {recipe.name}
-    //         <button onClick={() => deleteRecipe(recipe.id)}>Delete</button>
-    //     </li>
     ;
 
     if (loading) {
-        return <p>Loading...</p>;
-    }
-
-    return (
+        return (
+        <div>
+            <p>Loading...</p>
+            <Spinner animation='border'></Spinner>
+        </div>
+        )
+    };
+        return (
         <div>
             <ul>{recipeList}</ul>
         </div>

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import EditLog from './EditLog';
 import DisplayDailyMeals from './DisplayDailyMeals';
 import Button from 'react-bootstrap/Button';
+import Spinner from 'react-bootstrap/Spinner';
 //useState updates as it renders
 export default function DailyLog() {
 
@@ -55,11 +56,14 @@ export default function DailyLog() {
       }, [rendered]);
       
 
-//As of now just attempting to return the current date as a header
-
         if(loading) {
-            return <p>loading...</p>
-        }
+            return (
+            <div>
+            <p>Loading...</p>
+            <Spinner animation='border'></Spinner>
+            </div>
+            )
+        };
         return (
             <div className='dailyLog'>
                 <h1 id ='date'>{date}</h1>
