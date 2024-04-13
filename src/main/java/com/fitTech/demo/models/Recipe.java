@@ -29,7 +29,7 @@ public class Recipe {
     private double gramsProtein;
 
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "recipes")
     private List<DailyLog> dailyLogs;
 
     public Recipe() {
