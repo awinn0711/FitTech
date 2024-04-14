@@ -108,6 +108,7 @@ public class DailyLogController {
         DateDTO checkDate = new DateDTO(LocalDate.now());
         DailyLog log = dailyLogService.findByDate(checkDate);
 
+        //get nutrition facts from edamam api
         NutritionFactsDTO nutritionFactsDTO = ingredientService.getIngredientNutritionFacts(newIngredient);
         newIngredient.setCalories(nutritionFactsDTO.nutritionFacts.get("calories"));
         dailyLogService.addIngredientToLog(log, newIngredient);
