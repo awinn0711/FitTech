@@ -6,11 +6,13 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
+
+import jakarta.persistence.criteria.CriteriaBuilder;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
 @Entity
-@Table(name = "log")
+@Table
 public class DailyLog {
 
     @Id
@@ -55,9 +57,7 @@ public class DailyLog {
         return ingredients;
     }
 
-    public void setIngredients(List<Ingredient> ingredients) {
-        this.ingredients = ingredients;
-    }
+    public void addIngredient(Ingredient ingredient) {this.ingredients.add(ingredient);}
 
     public List<Recipe> getRecipes() {
         return recipes;

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { json } from 'react-router-dom';
+import Button from 'react-bootstrap/Button';
 
 
 export default function EditLog( {setRefresh, setRendered} ) {
@@ -66,7 +67,7 @@ export default function EditLog( {setRefresh, setRendered} ) {
                     ))
                 }
                 </select>
-                <button type='button' onClick={handleAddRecipeToLog}>Add {recipeToAdd.name} to today's log</button>
+                <Button variant='success' onClick={handleAddRecipeToLog}>Add {recipeToAdd.name} to today's log</Button>
             </form>
         </div>
     );
