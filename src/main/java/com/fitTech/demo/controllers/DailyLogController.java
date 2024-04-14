@@ -64,4 +64,23 @@ public class DailyLogController {
         }
     }
 
+    @DeleteMapping("/removeRecipeFromLog/{recipeId}")
+    public ResponseEntity<Void> removeRecipeFromLog(@PathVariable int recipeId) {
+        DateDTO checkDate = new DateDTO(LocalDate.now());
+        DailyLog log = dailyLogService.findByDate(checkDate);
+
+        Optional<Recipe> recipeToRemoveOptional = log.getRecipes().stream()
+                .filter(recipe -> recipe.getId() == recipeId)
+                .findFirst();
+
+        if (recipeToRemoveOptional.isPresent()) {
+            Recipe recipeToRemove = recipeToRemoveOptional.get();
+            log.getRecipes().remove(recipeToRemove);
+            dailyLogRepository.save(log);
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
 }
