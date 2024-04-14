@@ -1,14 +1,17 @@
 package com.fitTech.demo.controllers;
 
 import com.fitTech.demo.data.DailyLogRepository;
+import com.fitTech.demo.data.IngredientRepository;
 import com.fitTech.demo.data.RecipeRepository;
-import com.fitTech.demo.models.DTO.DailyLogDTO;
-import com.fitTech.demo.models.DTO.DateDTO;
-import com.fitTech.demo.models.DTO.RecipeDTO;
+import com.fitTech.demo.models.DTO.*;
 import com.fitTech.demo.models.DailyLog;
 import com.fitTech.demo.models.Date;
+import com.fitTech.demo.models.Ingredient;
 import com.fitTech.demo.models.Recipe;
 import com.fitTech.demo.service.DailyLogService;
+import com.fitTech.demo.service.IngredientService;
+import com.fitTech.demo.service.RecipeService;
+import jakarta.persistence.criteria.CriteriaBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,7 +33,16 @@ public class DailyLogController {
     private RecipeRepository recipeRepository;
 
     @Autowired
+    private IngredientRepository ingredientRepository;
+
+    @Autowired
     private DailyLogService dailyLogService;
+
+    @Autowired
+    private RecipeService recipeService;
+
+    @Autowired
+    private IngredientService ingredientService;
 
     @GetMapping
     public ResponseEntity<DailyLog> dailyLog() {
@@ -62,6 +74,25 @@ public class DailyLogController {
             dailyLogService.addRecipeToLog(log, recipeToAdd);
             return ResponseEntity.ok(log);
         }
+    }
+
+    @PostMapping("addIngredientToLog")
+    public ResponseEntity<DailyLog> addIngredientToLog(@RequestBody IngredientDTO ingredientDTO) {
+        Ingredient newIngredient;
+        Optional<Ingredient> result = Optional.ofNullable(ingredientService.findByName(ingredientDTO));
+        if(result.isEmpty()) {
+            newIngredient = new Ingredient(ingredientDTO.getName());
+            ingredientRepository.save(newIngredient);
+        } else {
+            newIngredient = result.get();
+        }
+        DateDTO checkDate = new DateDTO(LocalDate.now());
+        DailyLog log = dailyLogService.findByDate(checkDate);
+
+        NutritionFactsDTO nutritionFactsDTO = ingredientService.getIngredientNutritionFacts(newIngredient);
+        newIngredient.setCalories(nutritionFactsDTO.nutritionFacts.get("calories"));
+        dailyLogService.addIngredientToLog(log, newIngredient);
+        return ResponseEntity.ok(log);
     }
 
 }
