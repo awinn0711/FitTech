@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import EditLog from './EditLog';
 import DisplayDailyMeals from './DisplayDailyMeals';
 import Button from 'react-bootstrap/Button';
-
+import Spinner from 'react-bootstrap/Spinner';
+//useState updates as it renders
 export default function DailyLog() {
     const [dailyLog, setDailyLog] = useState ({});
     const [loading, setLoading] = useState(false); //conditional rendering
@@ -46,17 +47,21 @@ export default function DailyLog() {
             }
         }
 
-    if(loading) {
-        return <p>loading...</p>
-    }
-
-    return (
-        <div className='dailyLog'>
-            <h1 id ='date'>{date}</h1>
-            <div id='calories'>Today's Calories: </div>
-            <h2>Today's Meals: </h2>
-            <DisplayDailyMeals todaysRecipes={todaysRecipes} removeRecipeFromLog={removeRecipeFromLog}/>
-            <EditLog setRefresh = {setRefresh} setRendered = {setRendered} />
-        </div>
-    )
+        if(loading) {
+            return (
+            <div>
+            <p>Loading...</p>
+            <Spinner animation='border'></Spinner>
+            </div>
+            )
+        };
+        return (
+            <div className='dailyLog'>
+                <h1 id ='date'>{date}</h1>
+                <div id='calories'>Today's Calories: </div>
+                <h2>Today's Meals: </h2>
+                <DisplayDailyMeals todaysRecipes={todaysRecipes} removeRecipeFromLog={removeRecipeFromLog}/>                
+                <EditLog setRefresh = {setRefresh} setRendered = {setRendered} />
+            </div>
+        )
 };

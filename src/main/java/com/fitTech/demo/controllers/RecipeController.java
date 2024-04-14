@@ -1,7 +1,10 @@
 package com.fitTech.demo.controllers;
 
+import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.fitTech.demo.data.RecipeRepository;
+import com.fitTech.demo.models.DTO.NutritionFactsDTO;
 import com.fitTech.demo.models.Recipe;
+import com.fitTech.demo.service.RecipeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +20,13 @@ import java.util.Optional;
 @RequestMapping("/api/recipes")
 public class RecipeController {
 
+    @Autowired
     private RecipeRepository recipeRepository;
+
+    @Autowired
+    RecipeService recipeService;
+
+
 
     public RecipeController(RecipeRepository recipeRepository) {
         this.recipeRepository = recipeRepository;
@@ -38,6 +47,10 @@ public class RecipeController {
 
     @PostMapping
     public ResponseEntity<Recipe> addRecipe(@RequestBody Recipe recipe) {
+        //calls method to post recipe info to edamam api for nutrition info
+        NutritionFactsDTO nutritionFactsDTO = recipeService.getRecipeNutritionFacts(recipe);
+        recipe.setCalories(nutritionFactsDTO.nutritionFacts.get("calories"));
+
         Recipe savedRecipe = recipeRepository.save(recipe);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedRecipe);
     }
