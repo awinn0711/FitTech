@@ -1,9 +1,18 @@
 import React, { useState } from 'react';
+import Button from 'react-bootstrap/Button';
+import Table from 'react-bootstrap/Table';
+import { useAuth0 } from "@auth0/auth0-react";
+
+
 
 export default function AddRecipe() {
+    const { user, isAuthenticated, isLoading } = useAuth0();
+
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
     const [ingredientsList, setIngredientsList] = useState([]);
+    const [ingrAmount, setIngrAmount] = useState(0);
+    const [ingrUnit, setIngrUnit] = useState("");
     const [ingredientInput, setIngredientInput] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
     const [successMessage, setSuccessMessage] = useState(""); // New state for success message
@@ -14,10 +23,15 @@ export default function AddRecipe() {
 
     const handleAddIngredient = () => {
         if (ingredientInput !== "") {
-            setIngredientsList([...ingredientsList, ingredientInput]);
+            let newIngredient = `${ingrAmount} ${ingrUnit} ${ingredientInput}`
+            setIngredientsList([...ingredientsList, newIngredient]);
             setIngredientInput("");
         }
     };
+
+    const handleRemoveItem = target => {
+        setIngredientsList(ingredientsList.filter(ingredient => ingredient !== target))
+    }
 
     const handleSaveRecipe = () => {
         if (name.trim() === "" || description.trim() === "" || ingredientsList.length === 0) {
@@ -28,8 +42,10 @@ export default function AddRecipe() {
         const recipeData = {
             name: name,
             description: description,
-            ingredientsList: ingredientsList
+            ingr: ingredientsList,
+            userEmail: user.email
         };
+        console.log(recipeData);
 
         fetch('http://localhost:8080/api/recipes', {
             method: 'POST',
@@ -74,18 +90,37 @@ export default function AddRecipe() {
                     <textarea value={description} onChange={(e) => setDescription(e.target.value)} />
                 </label>
                 <br />
+                    {(ingredientsList.length > 0) && 
+                        <Table>
+                            <thead>
+                                <tr>
+                                <th>Ingredients</th>
+                                <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {ingredientsList.map((ingredient, index) => (
+                                <tr key={index}><td>{ingredient}</td>
+                                    <td><Button variant='outline-danger' size='sm' onClick={() => handleRemoveItem(ingredient)}>Remove</Button></td>
+                                </tr>
+                            ))}
+                            </tbody>
+                        </Table>}
+                        
                 <label>
-                    Ingredients:
-                    <ul>
-                        {ingredientsList.map((ingredient, index) => (
-                            <li key={index}>{ingredient}</li>
-                        ))}
-                    </ul>
+                    <input type='number' value={ingrAmount} onChange={(e) => setIngrAmount(e.target.value)} />
+                    <select onChange={(e) => setIngrUnit(e.target.value)}>
+                        <option value=" "> </option>
+                        <option value="grams">grams</option>
+                        <option value="oz">oz</option>
+                        <option value="lbs">lbs</option>
+                        <option value="serving">serving</option>
+                    </select>
                     <input type="text" value={ingredientInput} onChange={handleIngredientChange} />
-                    <button type="button" onClick={handleAddIngredient}>Add Ingredient</button>
+                    <Button variant='primary' onClick={handleAddIngredient}>Add Ingredient</Button>
                 </label>
                 <br />
-                <button type="button" onClick={handleSaveRecipe}>Save Recipe</button>
+                <p><Button variant='success' onClick={handleSaveRecipe}>Save Recipe</Button></p>
             </form>
         </div>
     );

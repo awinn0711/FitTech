@@ -5,6 +5,7 @@ import com.fitTech.demo.models.DTO.DailyLogDTO;
 import com.fitTech.demo.models.DTO.DateDTO;
 import com.fitTech.demo.models.DTO.RecipeDTO;
 import com.fitTech.demo.models.DailyLog;
+import com.fitTech.demo.models.Ingredient;
 import com.fitTech.demo.models.Recipe;
 import com.fitTech.demo.service.DailyLogService;
 import org.springframework.stereotype.Service;
@@ -35,6 +36,12 @@ public class DailyLogServiceImpl implements DailyLogService {
     @Override
     public void addRecipeToLog(DailyLog log, Recipe recipe) {
         log.addRecipe(recipe);
+        dailyLogRepository.save(log);
+    }
+
+    @Override
+    public void addIngredientToLog(DailyLog log, Ingredient ingredient) {
+        log.addIngredient(ingredient);
         dailyLogRepository.save(log);
     }
 }

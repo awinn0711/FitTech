@@ -6,19 +6,18 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
+
+import jakarta.persistence.criteria.CriteriaBuilder;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
 @Entity
-@Table(name = "log")
+@Table
 public class DailyLog {
 
     @Id
     @GeneratedValue
     private int id;
-
-    @ManyToOne
-    private User user;
 
     @ManyToMany
     private List<Ingredient> ingredients;
@@ -34,30 +33,17 @@ public class DailyLog {
     public DailyLog(Date date) {
         this.date = date;
     };
-    public DailyLog (User user) {
-        super();
-        this.user = user;
-    };
+
 
     public int getId() {
         return id;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 
     public List<Ingredient> getIngredients() {
         return ingredients;
     }
 
-    public void setIngredients(List<Ingredient> ingredients) {
-        this.ingredients = ingredients;
-    }
+    public void addIngredient(Ingredient ingredient) {this.ingredients.add(ingredient);}
 
     public List<Recipe> getRecipes() {
         return recipes;

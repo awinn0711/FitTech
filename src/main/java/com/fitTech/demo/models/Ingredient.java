@@ -2,6 +2,8 @@ package com.fitTech.demo.models;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 public class Ingredient {
 
@@ -11,9 +13,15 @@ public class Ingredient {
 
     private String name;
     private String category;
+    private int calories;
 
-    public Ingredient() {
+    @ManyToMany(mappedBy = "ingredients")
+    private List<DailyLog> dailyLogs;
 
+    public Ingredient() {};
+
+    public Ingredient(String name) {
+        this.name = name;
     }
 
     public Ingredient(String name, String category) {
@@ -41,4 +49,11 @@ public class Ingredient {
         return id;
     }
 
+    public int getCalories() {
+        return calories;
+    }
+
+    public void setCalories(int calories) {
+        this.calories = calories;
+    }
 }
