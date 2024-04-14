@@ -5,33 +5,15 @@ import Button from 'react-bootstrap/Button';
 import Spinner from 'react-bootstrap/Spinner';
 //useState updates as it renders
 export default function DailyLog() {
-
     const [dailyLog, setDailyLog] = useState ({});
     const [loading, setLoading] = useState(false); //conditional rendering
     const [date, setDate] = useState(null);
     const [todaysRecipes, setTodaysRecipes] = useState([]);
     const [refresh, setRefresh] = useState(0);
     const [rendered, setRendered] = useState(false);
-    const [removeMeals, setRemoveMeals] = useState(false);
 
-//should fetch data from DailyLogController
+    async function fetchData() {
 
-    // useEffect(() => {
-    //     setLoading(true);
-
-    //     fetch('http://localhost:8080/api/dailylog')
-    //       .then(response => response.json())
-    //       .then(data => {setDailyLog(data);
-    //                      setLoading(false);
-    //                      console.log(dailyLog);
-    //       })
-    //       .catch(error => console.error('Error fetching data:', error));
-
-    //       let todaysDate = dailyLog.date.date;
-    //       setDate(todaysDate);
-    //   }, []);
-      
-      async function fetchData() {
         let response = await fetch("http://localhost:8080/api/dailylog"); //await returns promise to allow to receive data "after the fact". fetch url for controller you receiving data from
         let data = await response.json() //convert response to json
         .then( data => {
@@ -42,19 +24,28 @@ export default function DailyLog() {
             setTodaysRecipes(recipeList);
             setLoading(false)
             console.log("today's log: ", data);
-            });
-        };
+        });
+    };
 
-      useEffect(() => {
+    useEffect(() => {
         setLoading(true);
         fetchData();
-        const timer = setTimeout(() => { 
-            setRendered(true); 
-          }, 500); 
-       
-          return () => clearTimeout(timer); 
-      }, [rendered]);
-      
+        const timer = setTimeout(() => {
+            setRendered(true);
+        }, 500);
+        return () => clearTimeout(timer);
+    }, [rendered]);
+
+    async function removeRecipeFromLog(recipeId) {
+            try {
+                await fetch("http://localhost:8080/api/dailylog/removeRecipeFromLog/" + recipeId, {
+                    method: 'DELETE',
+                });
+                fetchData();
+            } catch (error) {
+                console.error('Error removing meal:', error);
+            }
+        }
 
         if(loading) {
             return (
