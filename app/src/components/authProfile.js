@@ -7,14 +7,14 @@ const AuthProfile = () => {
   const { user, isAuthenticated, isLoading } = useAuth0();
 
   if (isLoading) {
-<<<<<<< HEAD
-    return <div>Loading ...Please Wait</div>;
-=======
+
+   // return <div>Loading ...Please Wait</div>;
+
     return <div>
     <p>Loading...</p>
     <Spinner animation='border'></Spinner>
 </div>
->>>>>>> main
+
   }
 
   return (
