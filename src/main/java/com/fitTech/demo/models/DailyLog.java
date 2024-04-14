@@ -17,9 +17,6 @@ public class DailyLog {
     @GeneratedValue
     private int id;
 
-    @ManyToOne
-    private User user;
-
     @ManyToMany
     private List<Ingredient> ingredients;
 
@@ -34,21 +31,10 @@ public class DailyLog {
     public DailyLog(Date date) {
         this.date = date;
     };
-    public DailyLog (User user) {
-        super();
-        this.user = user;
-    };
+
 
     public int getId() {
         return id;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 
     public List<Ingredient> getIngredients() {
