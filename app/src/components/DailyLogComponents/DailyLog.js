@@ -60,8 +60,7 @@ export default function DailyLog() {
                 <h1 id ='date'>{date}</h1>
                 <div id='calories'>Today's Calories: </div>
                 <h2>Today's Meals: </h2>
-                {rendered && <DisplayDailyMeals todaysRecipes={todaysRecipes}/>}
-                <Button variant="secondary">Remove Meal</Button>
+                <DisplayDailyMeals todaysRecipes={todaysRecipes} removeRecipeFromLog={removeRecipeFromLog}/>                
                 <EditLog setRefresh = {setRefresh} setRendered = {setRendered} />
             </div>
         )
