@@ -16,7 +16,8 @@ const baseUrl = process.env.REACT_APP_BASEURL;
 const App = () => {
   return (
     <Router>
-      <div className='container'><NavBar />
+        <NavBar />
+      <div className='container'>
       <Routes>
         <Route exact path="/" element={<Home />}/>
         <Route exact path="/dailylog" element={<DailyLog />}/>
