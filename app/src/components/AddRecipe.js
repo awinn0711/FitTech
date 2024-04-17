@@ -25,7 +25,7 @@ export default function AddRecipe() {
     };
 
     const handleAddIngredient = () => {
-        if((ingrAmount < .1) || (ingrAmount < .5 && ingrUnit == "oz")) {
+        if((ingrAmount < .1) || (ingrAmount < .5 && ingrUnit == "oz") || (ingrAmount <.5 && ingrAmount == "serving")) {
             setErrorMessage("Ingredient amount is too small to measure nutrition facts. Please increase amount or ignore this ingredient.")
             setIngrAmount(0);
             return;
