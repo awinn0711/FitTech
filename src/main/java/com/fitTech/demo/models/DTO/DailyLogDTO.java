@@ -2,14 +2,10 @@ package com.fitTech.demo.models.DTO;
 
 import com.fitTech.demo.models.Date;
 import com.fitTech.demo.models.Ingredient;
-import com.fitTech.demo.models.User;
 
 import java.util.List;
-import java.util.Objects;
 
 public class DailyLogDTO {
-
-    private User user;
 
     private List<Ingredient> ingredients;
 
@@ -19,19 +15,9 @@ public class DailyLogDTO {
         this.date = date;
     }
 
-    public DailyLogDTO(User user, List<Ingredient> ingredients) {
+    public DailyLogDTO(List<Ingredient> ingredients) {
         super();
-        this.user = user;
         this.ingredients = ingredients;
-    }
-
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 
     public List<Ingredient> getIngredients() {

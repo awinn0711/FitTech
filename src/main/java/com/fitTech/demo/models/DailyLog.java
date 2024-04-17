@@ -19,8 +19,7 @@ public class DailyLog {
     @GeneratedValue
     private int id;
 
-    @ManyToOne
-    private User user;
+    private String userEmail;
 
     @ManyToMany
     private List<Ingredient> ingredients;
@@ -33,24 +32,21 @@ public class DailyLog {
 
 
     public DailyLog(){};
-    public DailyLog(Date date) {
+    public DailyLog(Date date, String userEmail) {
         this.date = date;
-    };
-    public DailyLog (User user) {
-        super();
-        this.user = user;
+        this.userEmail = userEmail;
     };
 
     public int getId() {
         return id;
     }
 
-    public User getUser() {
-        return user;
+    public String getUserEmail() {
+        return userEmail;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
     }
 
     public List<Ingredient> getIngredients() {
