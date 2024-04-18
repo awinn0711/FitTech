@@ -10,7 +10,8 @@ const { user, isAuthenticated, isLoading } = useAuth0();
    return (
 
 
-       <div>
+
+        <div className="NavBar">
          <h1>Welcome to Fit-Tech</h1>
          <p><Link to="/">Home</Link></p>
            <p><Link to="dailylog">View Today's Log</Link></p>
