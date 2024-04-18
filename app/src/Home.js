@@ -19,7 +19,7 @@ const { user, isAuthenticated, isLoading } = useAuth0();
   return (
     <div>
       <h1>Welcome to Fit-Tech, {user.name}</h1>
-
+         <p><Link to="login">LogIn</Link></p>
 
     </div>
   );
