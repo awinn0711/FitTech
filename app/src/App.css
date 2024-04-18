@@ -11,6 +11,16 @@
   background-color: lightgreen;
 }
 
+.NavBar {
+float: left;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
 #calories {
   text-align: left;
   font-size: 50px;
