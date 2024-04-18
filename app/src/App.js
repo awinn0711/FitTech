@@ -4,18 +4,19 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Home from './Home';
 import AddRecipe from './components/AddRecipe';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import AuthLogin from './components/authLogin';
-import AuthProfile from './components/authProfile';
-import AuthLogout from './components/authLogout';
+import AuthLogin from './components/AuthLogin';
+import AuthProfile from './components/AuthProfile';
+import AuthLogout from './components/AuthLogout';
 import DailyLog from './components/DailyLogComponents/DailyLog';
 import AllRecipes from './components/AllRecipes';
-
+import NavBar from './components/NavBar.js'
 
 const baseUrl = process.env.REACT_APP_BASEURL;
 
 const App = () => {
   return (
     <Router>
+        <NavBar />
       <div className='container'>
       <Routes>
         <Route exact path="/" element={<Home />}/>
