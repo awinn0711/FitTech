@@ -19,7 +19,7 @@ public class WeightInfoController {
     private WeightInfoService weightInfoService;
 
     @Autowired
-    WeightInfoRepository weightInfoRepository;
+    private WeightInfoRepository weightInfoRepository;
 
     @GetMapping()
     public ResponseEntity<WeightInfo> getWeightInfo(@PathVariable String userEmail) {
@@ -35,7 +35,7 @@ public class WeightInfoController {
         }
     }
 
-    @PostMapping()
+    @PostMapping("setTargetWeight")
     public ResponseEntity<WeightInfo> setTargetWeight(@PathVariable String userEmail, @PathVariable int targetWeight) {
         WeightInfo weightInfo = weightInfoService.findByUserEmail(userEmail);
         weightInfo.setWeightGoal(targetWeight);
@@ -43,7 +43,7 @@ public class WeightInfoController {
         return ResponseEntity.ok(weightInfo);
     }
 
-    @PostMapping()
+    @PostMapping("setCurrentWeight")
     public ResponseEntity<WeightInfo> setCurrentWeight(@PathVariable String userEmail, @PathVariable int newWeight) {
         WeightInfo weightInfo = weightInfoService.findByUserEmail(userEmail);
         weightInfo.setCurrentWeight(newWeight);
