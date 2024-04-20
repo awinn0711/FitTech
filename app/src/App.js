@@ -9,6 +9,7 @@ import AuthProfile from './components/authProfile';
 import AuthLogout from './components/authLogout';
 import DailyLog from './components/DailyLogComponents/DailyLog';
 import AllRecipes from './components/AllRecipes';
+import EditRecipe from './components/EditRecipe'
 
 
 const baseUrl = process.env.REACT_APP_BASEURL;
@@ -25,6 +26,7 @@ const App = () => {
         <Route exact path="/login" element={<AuthLogin />} />
         <Route exact path="/profile" element={<AuthProfile />} />
         <Route exact path="/logout" element={<AuthLogout />} />
+        <Route path="/editrecipe/:recipeId" element={<EditRecipe />} />
       </Routes>
       </div>
     </Router>

@@ -1,6 +1,5 @@
 package com.fitTech.demo.controllers;
 
-import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.fitTech.demo.data.RecipeRepository;
 import com.fitTech.demo.models.DTO.NutritionFactsDTO;
 import com.fitTech.demo.models.Recipe;
@@ -14,7 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-//@CrossOrigin(origins = "http://localhost:3000")
 @CrossOrigin
 @RestController
 @RequestMapping("/api/recipes")
@@ -25,8 +23,6 @@ public class RecipeController {
 
     @Autowired
     RecipeService recipeService;
-
-
 
     public RecipeController(RecipeRepository recipeRepository) {
         this.recipeRepository = recipeRepository;
@@ -61,4 +57,19 @@ public class RecipeController {
         return ResponseEntity.noContent().build();
     }
 
+    @PostMapping("/{recipeId}")
+    public ResponseEntity<?> editRecipe(@PathVariable int recipeId, @RequestBody Recipe editedRecipeData) {
+        Optional<Recipe> optionalRecipe = recipeRepository.findById(recipeId);
+        if (optionalRecipe.isPresent()) {
+            Recipe existingRecipe = optionalRecipe.get();
+            existingRecipe.setName(editedRecipeData.getName());
+            existingRecipe.setDescription(editedRecipeData.getDescription());
+            existingRecipe.setIngredients(editedRecipeData.getIngredients());
+            Recipe savedRecipe = recipeRepository.save(existingRecipe);
+            return ResponseEntity.ok(savedRecipe);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+
+    }
 }
