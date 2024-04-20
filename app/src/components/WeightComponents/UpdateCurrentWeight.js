@@ -1,15 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 
-export default function UpdateCurrentWeight({user, currentWeight, setCurrentWeight}) {
+export default function UpdateCurrentWeight({userEmail, currentWeight, setCurrentWeight, setMessage}) {
 
     async function handleUpdateCurrentWeight() {
         try {
-            await fetch(`http://localhost:8080/api/weightinfo/${user.email}/setCurrentWeight/${currentWeight}`, {
+            await fetch(`http://localhost:8080/api/weightinfo/${userEmail}/setCurrentWeight/${currentWeight}`, {
                 method: 'POST',
-            });
+                mode: 'no-cors'
+            })
+            .then(
+                setMessage("Weight updated!")
+            )
         } catch (error) {
-            console.error('Error removing meal:', error);
+            console.error('Error updating current weight:', error);
         }
     }
 

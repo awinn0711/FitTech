@@ -11,13 +11,16 @@ public class WeightInfo {
     @GeneratedValue
     private int id;
 
-    private final String userEmail;
+    private String userEmail;
 
     private int weightGoal;
 
     private int currentWeight;
 
+    public WeightInfo() {};
+
     public WeightInfo(String userEmail) {
+        super();
         this.userEmail = userEmail;
     }
 

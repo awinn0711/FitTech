@@ -10,6 +10,7 @@ export default function WeightInfo() {
     const[weightGoal, setWeightGoal] = useState(null);
     const { user, isAuthenticated, isLoading } = useAuth0();
     const [loading, setLoading] = useState(false);
+    const [message, setMessage] = useState("");
 
     useEffect(() => {
         setLoading(true);
@@ -45,10 +46,11 @@ export default function WeightInfo() {
 
     return(
         <div>
-            <h2>Your current weight: {currentWeight}</h2>
-            <UpdateCurrentWeight currentWeight={currentWeight} setCurrentWeight={setCurrentWeight} />
-            <h2>Your target weight: {weightGoal}</h2>
-            <UpdateWeightGoal user={user} weightGoal={weightGoal} setWeightGoal={setWeightGoal} />
+            {message && <h2>{message}</h2>}
+            <h2>Your current weight: {currentWeight} lbs</h2>
+            <UpdateCurrentWeight userEmail={user.email} currentWeight={currentWeight} setCurrentWeight={setCurrentWeight} setMessage={setMessage}/>
+            <h2>Your target weight: {weightGoal} lbs</h2>
+            <UpdateWeightGoal userEmail={user.email} weightGoal={weightGoal} setWeightGoal={setWeightGoal} setMessage={setMessage}/>
         </div>
     )
 
