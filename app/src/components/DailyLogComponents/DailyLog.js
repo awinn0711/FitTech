@@ -4,6 +4,7 @@ import EditLog from './EditLog';
 import DisplayDailyMeals from './DisplayDailyMeals';
 import Button from 'react-bootstrap/Button';
 import Spinner from 'react-bootstrap/Spinner';
+import Card from 'react-bootstrap/Card';
 import WeightInfo from '../WeightComponents/WeightInfo';
 
 //useState updates as it renders
@@ -71,7 +72,8 @@ export default function DailyLog() {
                 <h2>Today's Meals: </h2>
                 {(rendered && todaysRecipes) && <DisplayDailyMeals todaysRecipes={todaysRecipes} removeRecipeFromLog={removeRecipeFromLog}/>}              
                 <EditLog setRefresh = {setRefresh} setRendered = {setRendered} />
-                <WeightInfo />
+                <Card ><WeightInfo /></Card>
+                
             </div>
         )
 };
