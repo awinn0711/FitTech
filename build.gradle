@@ -25,12 +25,9 @@ dependencies {
 	runtimeOnly 'com.mysql:mysql-connector-j'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
-	//testImplementation 'org.springframework.security:spring-security-test'
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	//implementation 'com.okta.spring:okta-spring-boot-starter:3.0.5'
 
-}
+	tasks.named('test') {
+		useJUnitPlatform()
+	}
 
-tasks.named('test') {
-	useJUnitPlatform()
 }
