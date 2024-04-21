@@ -25,6 +25,7 @@ const { user, isAuthenticated, isLoading } = useAuth0();
         <ProfilePicture />
 
 
+
     </div>
   );
 }
