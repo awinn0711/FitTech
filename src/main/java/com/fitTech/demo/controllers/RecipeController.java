@@ -57,7 +57,7 @@ public class RecipeController {
         return ResponseEntity.noContent().build();
     }
 
-    @PostMapping("/{recipeId}")
+    @PutMapping("/{recipeId}")
     public ResponseEntity<?> editRecipe(@PathVariable int recipeId, @RequestBody Recipe editedRecipeData) {
         Optional<Recipe> optionalRecipe = recipeRepository.findById(recipeId);
         if (optionalRecipe.isPresent()) {
@@ -65,11 +65,15 @@ public class RecipeController {
             existingRecipe.setName(editedRecipeData.getName());
             existingRecipe.setDescription(editedRecipeData.getDescription());
             existingRecipe.setIngredients(editedRecipeData.getIngredients());
+
+            //call method to post recipe info to edamam api for nutritional data
+            NutritionFactsDTO nutritionFactsDTO = recipeService.getRecipeNutritionFacts(existingRecipe);
+            existingRecipe.setCalories(nutritionFactsDTO.nutritionFacts.get("calories"));
+
             Recipe savedRecipe = recipeRepository.save(existingRecipe);
             return ResponseEntity.ok(savedRecipe);
         } else {
             return ResponseEntity.notFound().build();
         }
-
     }
 }

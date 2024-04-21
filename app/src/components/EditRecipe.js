@@ -62,7 +62,7 @@ const EditRecipe = () => {
         };
 
         fetch("http://localhost:8080/api/recipes/" + recipeId, {
-            method: 'POST',
+            method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
             },
