@@ -17,13 +17,22 @@ export default function AddRecipe() {
     const [errorMessage, setErrorMessage] = useState("");
     const [successMessage, setSuccessMessage] = useState(""); // New state for success message
 
+    const units = [" ", "oz", "lbs", "cup", "serving"];
+
     const handleIngredientChange = (e) => {
         setIngredientInput(e.target.value);
+        
     };
 
     const handleAddIngredient = () => {
+        if((ingrAmount < .1) || (ingrAmount < .5 && ingrUnit == "oz") || (ingrAmount <.5 && ingrAmount == "serving")) {
+            setErrorMessage("Ingredient amount is too small to measure nutrition facts. Please increase amount or ignore this ingredient.")
+            setIngrAmount(0);
+            return;
+        }
         if (ingredientInput !== "") {
-            let newIngredient = `${ingrAmount} ${ingrUnit} ${ingredientInput}`
+            setErrorMessage("");
+            let newIngredient = `${ingrAmount} ${ingrUnit} ${ingredientInput}`;
             setIngredientsList([...ingredientsList, newIngredient]);
             setIngredientInput("");
         }
@@ -37,7 +46,8 @@ export default function AddRecipe() {
         if (name.trim() === "" || description.trim() === "" || ingredientsList.length === 0) {
             setErrorMessage('Please fill in all fields before saving the recipe');
             return;
-        }
+        } 
+
 
         const recipeData = {
             name: name,
@@ -108,13 +118,11 @@ export default function AddRecipe() {
                         </Table>}
                         
                 <label>
-                    <input type='number' value={ingrAmount} onChange={(e) => setIngrAmount(e.target.value)} />
+                    <input type='number' value={ingrAmount} onChange={(e) => setIngrAmount(e.target.value)}/>
                     <select onChange={(e) => setIngrUnit(e.target.value)}>
-                        <option value=" "> </option>
-                        <option value="grams">grams</option>
-                        <option value="oz">oz</option>
-                        <option value="lbs">lbs</option>
-                        <option value="serving">serving</option>
+                        {units.map((unit) => (
+                            <option value={unit}>{unit}</option>
+                        ))}
                     </select>
                     <input type="text" value={ingredientInput} onChange={handleIngredientChange} />
                     <Button variant='primary' onClick={handleAddIngredient}>Add Ingredient</Button>

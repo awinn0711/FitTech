@@ -6,12 +6,18 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 
 const Navbar = () => {
+const { user, isAuthenticated, isLoading } = useAuth0();
    return (
 
 
-       <div>
+
+        <div className="NavBar">
          <h1>Welcome to Fit-Tech</h1>
+<<<<<<< HEAD
            <p><Link to="/">Home</Link></p>
+=======
+         <p><Link to="/">Home</Link></p>
+>>>>>>> main
            <p><Link to="dailylog">View Today's Log</Link></p>
            <p><Link to="recipes">Add a Recipe</Link></p>
            <p><Link to="allrecipes">View All Recipes</Link></p>
