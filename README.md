@@ -57,6 +57,4 @@ Project Link: https://github.com/WolfeCodes/Inventors
 - MySQL for Database
 - APIs:
 Edamam Nutritional Analysis (https://developer.edamam.com/edamam-docs-nutrition-api)
-Edamam Recipe Search (https://developer.edamam.com/edamam-docs-recipe-api)
-Tasty (https://rapidapi.com/apidojo/api/tasty/)
 
