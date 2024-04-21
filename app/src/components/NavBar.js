@@ -20,7 +20,7 @@ const { user, isAuthenticated, isLoading } = useAuth0();
                    <p><Link to="logout">LogOut</Link></p>
               </div>
 
-     );
+
    }
 
 
