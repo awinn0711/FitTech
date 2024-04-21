@@ -25,9 +25,9 @@ public class DailyLogServiceImpl implements DailyLogService {
     }
 
     @Override
-    public DailyLog findByDateAndUser (DateDTO aDate, String userEmail) {
+    public DailyLog findByDate (DateDTO aDate) {
         for (DailyLog log : dailyLogRepository.findAll()) {
-            if ((log.getDate().getDate().equals(aDate.getDate())) && (log.getUserEmail()).equals(userEmail)) {
+            if (log.getDate().getDate().equals(aDate.getDate())) {
                 return log;
             }
         } return null;

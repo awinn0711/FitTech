@@ -23,7 +23,7 @@ import java.util.Optional;
 //@CrossOrigin(origins = "http://localhost:8080")//bc frontend and backend are running on different servers, this annotation allows frontend to fetch data from another server
 @CrossOrigin
 @RestController
-@RequestMapping("/api/dailylog/{userEmail}")
+@RequestMapping("/api/dailylog")
 public class DailyLogController {
 
     @Autowired
@@ -44,15 +44,15 @@ public class DailyLogController {
     @Autowired
     private IngredientService ingredientService;
 
-    @GetMapping()
-    public ResponseEntity<DailyLog> dailyLog(@PathVariable String userEmail) {
-        //check if dailyLog object exists for current date and user. if so return it, if not, create new object
+    @GetMapping
+    public ResponseEntity<DailyLog> dailyLog() {
+        //check if dailyLog object exists for current date. if so return it, if not, create new object
         DailyLog todaysLog;
         DateDTO checkDate = new DateDTO(LocalDate.now());
-        Optional<DailyLog> result = Optional.ofNullable(dailyLogService.findByDateAndUser(checkDate, userEmail));
+        Optional<DailyLog> result = Optional.ofNullable(dailyLogService.findByDate(checkDate));
         if (result.isEmpty()) {
             Date todaysDate = new Date(checkDate.getDate());
-            todaysLog = new DailyLog(todaysDate, userEmail);
+            todaysLog = new DailyLog(todaysDate);
             dailyLogRepository.save(todaysLog);
             return new ResponseEntity<>(todaysLog, HttpStatus.CREATED);
         }else {
@@ -62,9 +62,9 @@ public class DailyLogController {
     }
 
     @PostMapping("addRecipeToLog")
-    public ResponseEntity<DailyLog> addRecipeToLog(@PathVariable String userEmail, @RequestBody Recipe recipe) {
+    public ResponseEntity<DailyLog> addRecipeToLog(@RequestBody Recipe recipe) {
         DateDTO checkDate = new DateDTO(LocalDate.now());
-        DailyLog log = dailyLogService.findByDateAndUser(checkDate, userEmail);
+        DailyLog log = dailyLogService.findByDate(checkDate);
 
         Optional<Recipe> result = recipeRepository.findById(recipe.getId());
         if(result.isEmpty()) {
@@ -77,9 +77,9 @@ public class DailyLogController {
     }
 
     @DeleteMapping("/removeRecipeFromLog/{recipeId}")
-    public ResponseEntity<Void> removeRecipeFromLog(@PathVariable String userEmail, @PathVariable int recipeId) {
+    public ResponseEntity<Void> removeRecipeFromLog(@PathVariable int recipeId) {
         DateDTO checkDate = new DateDTO(LocalDate.now());
-        DailyLog log = dailyLogService.findByDateAndUser(checkDate, userEmail);
+        DailyLog log = dailyLogService.findByDate(checkDate);
 
         Optional<Recipe> recipeToRemoveOptional = log.getRecipes().stream()
                 .filter(recipe -> recipe.getId() == recipeId)
@@ -96,7 +96,7 @@ public class DailyLogController {
     }
 
     @PostMapping("addIngredientToLog")
-    public ResponseEntity<DailyLog> addIngredientToLog(@PathVariable String userEmail, @RequestBody IngredientDTO ingredientDTO) {
+    public ResponseEntity<DailyLog> addIngredientToLog(@RequestBody IngredientDTO ingredientDTO) {
         Ingredient newIngredient;
         Optional<Ingredient> result = Optional.ofNullable(ingredientService.findByName(ingredientDTO));
         if(result.isEmpty()) {
@@ -106,7 +106,7 @@ public class DailyLogController {
             newIngredient = result.get();
         }
         DateDTO checkDate = new DateDTO(LocalDate.now());
-        DailyLog log = dailyLogService.findByDateAndUser(checkDate, userEmail);
+        DailyLog log = dailyLogService.findByDate(checkDate);
 
         //get nutrition facts from edamam api
         NutritionFactsDTO nutritionFactsDTO = ingredientService.getIngredientNutritionFacts(newIngredient);
@@ -114,7 +114,5 @@ public class DailyLogController {
         dailyLogService.addIngredientToLog(log, newIngredient);
         return ResponseEntity.ok(log);
     }
-
-
 
 }

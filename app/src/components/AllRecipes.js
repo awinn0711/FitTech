@@ -27,16 +27,11 @@ export default function AllRecipes() {
 
     const deleteRecipe = async (recipeId) => {
         try {
-            await axios.delete("http://localhost:8080/api/recipes/" + recipeId);
+            await axios.delete(`http://localhost:8080/api/recipes/${recipeId}`);
             setRecipes(recipes.filter(recipe => recipe.id !== recipeId));
         } catch (error) {
             console.error('Error deleting recipe:', error);
         }
-    };
-
-    const editRecipe = (recipeId) => {
-        // TODO - This opens a new tab. Change to redirect in current tab.
-        window.location.href = "/editrecipe/" + `${recipeId}`
     };
 
     const recipeList = 
@@ -50,16 +45,15 @@ export default function AllRecipes() {
             <th>Delete Recipe</th>
         </tr>
         <tbody>
-            {recipes.map((recipe) => (
-                <tr key={recipe.id}>
-                    <td>{recipe.name}</td>
-                    <td>{recipe.description}</td>
-                    <td>{recipe.ingr}</td>
-                    <td>{recipe.calories}</td>
-                    <Button variant='outline-primary' size='sm' onClick={() => editRecipe(recipe.id)}>Edit</Button>
-                    <Button variant='outline-danger' size='sm' onClick={() => deleteRecipe(recipe.id)}>Delete</Button>
-                </tr>
-            ))}
+        {recipes.map((recipe) => (
+            <tr key={recipe.id}>
+                <td>{recipe.name}</td>
+                <td>{recipe.description}</td>
+                <td>{recipe.ingr}</td>
+                <td>{recipe.calories}</td>
+                <Button variant='outline-danger' size='sm' onClick={() => deleteRecipe(recipe.id)}>Delete</Button>
+            </tr>
+        ))}
         </tbody>
        </Table>
     ;

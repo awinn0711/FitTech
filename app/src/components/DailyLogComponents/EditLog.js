@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { useAuth0 } from "@auth0/auth0-react";
 import { json } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 
@@ -9,8 +8,6 @@ export default function EditLog( {setRefresh, setRendered} ) {
     const [recipes, setRecipes] = useState([]);
     const [recipeToAdd, setRecipeToAdd] = useState({});
     const [loading, setLoading] = useState(false);
-    const { user, isAuthenticated, isLoading } = useAuth0();
-
 
     async function loadRecipes() {
         let response = await fetch('http://localhost:8080/api/recipes/all');
@@ -27,7 +24,7 @@ export default function EditLog( {setRefresh, setRendered} ) {
     }
 
     const handleAddRecipeToLog = () => {
-        fetch(`http://localhost:8080/api/dailylog/${user.email}/addRecipeToLog`, {
+        fetch('http://localhost:8080/api/dailylog/addRecipeToLog', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

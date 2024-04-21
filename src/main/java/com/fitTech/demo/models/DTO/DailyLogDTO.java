@@ -17,8 +17,11 @@ public class DailyLogDTO {
 
     public DailyLogDTO(List<Ingredient> ingredients) {
         super();
+
         this.ingredients = ingredients;
     }
+
+
 
     public List<Ingredient> getIngredients() {
         return ingredients;
