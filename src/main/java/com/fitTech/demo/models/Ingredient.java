@@ -1,5 +1,6 @@
 package com.fitTech.demo.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -11,7 +12,9 @@ public class Ingredient {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @JsonProperty("name")
     private String name;
+
     private String category;
     private int calories;
 

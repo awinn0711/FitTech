@@ -51,7 +51,6 @@ export default function EditLog( {setRefresh, setRendered} ) {
     useEffect(() => {
         setLoading(true);
         loadRecipes();
-        console.log("recipeToAdd: ", recipeToAdd);
     }, [recipeToAdd]);
 
     if(loading) {
@@ -60,7 +59,6 @@ export default function EditLog( {setRefresh, setRendered} ) {
 
     return (
         <div>
-            <h2>Add Meal to Today's Log</h2>
             <form>
             <label htmlFor="recipes">Choose a recipe:</label>
                 <select id="recipes" onChange={handleSelectRecipe}>

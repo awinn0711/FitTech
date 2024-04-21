@@ -96,11 +96,11 @@ public class DailyLogController {
     }
 
     @PostMapping("addIngredientToLog")
-    public ResponseEntity<DailyLog> addIngredientToLog(@PathVariable String userEmail, @RequestBody IngredientDTO ingredientDTO) {
+    public ResponseEntity<DailyLog> addIngredientToLog(@PathVariable String userEmail, @RequestBody Ingredient anIngredient) {
         Ingredient newIngredient;
-        Optional<Ingredient> result = Optional.ofNullable(ingredientService.findByName(ingredientDTO));
+        Optional<Ingredient> result = Optional.ofNullable(ingredientService.findByName(anIngredient));
         if(result.isEmpty()) {
-            newIngredient = new Ingredient(ingredientDTO.getName());
+            newIngredient = new Ingredient(anIngredient.getName());
             ingredientRepository.save(newIngredient);
         } else {
             newIngredient = result.get();
