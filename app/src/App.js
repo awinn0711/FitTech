@@ -11,7 +11,7 @@ import DailyLog from './components/DailyLogComponents/DailyLog';
 import AllRecipes from './components/AllRecipes';
 import EditRecipe from './components/EditRecipe'
 import NavBar from './components/NavBar.js'
-
+import background from './background/FITTECH.png'
 
 const baseUrl = process.env.REACT_APP_BASEURL;
 
@@ -19,7 +19,7 @@ const App = () => {
   return (
     <Router>
         <NavBar />
-      <div className='container'>
+      <div style={{ backgroundImage:`url(${background})`,backgroundRepeat:"no-repeat",backgroundSize:"contain", height:600,width:600 }}className='container'>
       <Routes>
         <Route exact path="/" element={<Home />}/>
         <Route exact path="/dailylog" element={<DailyLog />}/>
