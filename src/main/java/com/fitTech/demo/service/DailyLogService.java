@@ -11,7 +11,7 @@ public interface DailyLogService {
 
     DailyLogDTO createDailyLog(DailyLogDTO dailyLogDTO);
 
-    DailyLog findByDate (DateDTO aDate);
+    DailyLog findByDateAndUser (DateDTO aDate, String userEmail);
 
     void addRecipeToLog(DailyLog log, Recipe recipe);
 
