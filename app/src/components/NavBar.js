@@ -21,7 +21,8 @@ const { user, isAuthenticated, isLoading } = useAuth0();
               </div>
 
 
-   }
+   )
+}
 
 
 export default Navbar;
