@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
+import { useAuth0 } from "@auth0/auth0-react";
 
 const EditRecipe = () => {
     const {recipeId} = useParams();
@@ -13,6 +14,7 @@ const EditRecipe = () => {
     const [ingredientInput, setIngredientInput] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
     const [successMessage, setSuccessMessage] = useState("");
+    const { user } = useAuth0();
 
     useEffect(() => {
         fetchRecipe();
