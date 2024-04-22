@@ -1,5 +1,7 @@
 package com.fitTech.demo.models.DTO;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class IngredientDTO {
 
     private String name;
