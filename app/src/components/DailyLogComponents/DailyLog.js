@@ -7,6 +7,7 @@ import Spinner from 'react-bootstrap/Spinner';
 import Card from 'react-bootstrap/Card';
 import WeightInfo from '../WeightComponents/WeightInfo';
 import AddIngredientToLog from './AddIngredientToLog';
+import CalorieCounter from './CalorieCounter';
 
 //useState updates as it renders
 export default function DailyLog() {
@@ -72,7 +73,7 @@ export default function DailyLog() {
         return (
             <div className='dailyLog'>
                 <h1 id ='date'>{date}</h1>
-                <div id='calories'>Today's Calories: </div>
+                {(todaysIngredients && todaysRecipes) && <CalorieCounter todaysRecipes={todaysRecipes} todaysIngredients={todaysIngredients} />}
                 <h2>Today's Meals: </h2>
                 {(rendered && todaysRecipes && todaysIngredients) && <DisplayDailyMeals todaysIngredients={todaysIngredients} todaysRecipes={todaysRecipes} removeRecipeFromLog={removeRecipeFromLog}/>} 
                 <h2>Add Meal to Today's Log</h2>
