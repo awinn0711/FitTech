@@ -13,13 +13,16 @@ import EditRecipe from './components/EditRecipe'
 import NavBar from './components/NavBar.js'
 import background from './background/AppHomePage.png'
 
+
 const baseUrl = process.env.REACT_APP_BASEURL;
 
 const App = () => {
   return (
     <Router>
+
         <NavBar />
-      <div style={{ backgroundImage:`url(${background})`,backgroundRepeat:"no-repeat",backgroundSize:"contain", height:500,width:500 }}className='container'>
+      <div style={{ backgroundImage:`url(${background})`,backgroundRepeat:"no-repeat",backgroundSize:"cover", width: "100vw", height: "100vw"}}className='container'>
+
       <Routes>
         <Route exact path="/" element={<Home />}/>
         <Route exact path="/dailylog" element={<DailyLog />}/>
@@ -29,9 +32,11 @@ const App = () => {
         <Route exact path="/profile" element={<AuthProfile />} />
         <Route exact path="/logout" element={<AuthLogout />} />
         <Route path="/editrecipe/:recipeId" element={<EditRecipe />} />
-      </Routes>
+       </Routes>
       </div>
+
     </Router>
+
   );
 }
 
