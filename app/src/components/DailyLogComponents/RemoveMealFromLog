@@ -1,9 +1,0 @@
-import React, { useEffect, useState } from 'react';
-
-export default function RemoveMealFromLog() {
-
-    const [recipes, setRecipes] = useState([]);
-    const [recipesToRemove, setRecipesToRemove] = useState([]);
-    const [loading, setLoading] = useState(false);
-
-}

@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import { useAuth0 } from "@auth0/auth0-react";
 import EditLog from './EditLog';
 import DisplayDailyMeals from './DisplayDailyMeals';
 import Button from 'react-bootstrap/Button';
 import Spinner from 'react-bootstrap/Spinner';
+import Card from 'react-bootstrap/Card';
+import WeightInfo from '../WeightComponents/WeightInfo';
+
 //useState updates as it renders
 export default function DailyLog() {
     const [dailyLog, setDailyLog] = useState ({});
@@ -11,10 +15,16 @@ export default function DailyLog() {
     const [todaysRecipes, setTodaysRecipes] = useState([]);
     const [refresh, setRefresh] = useState(0);
     const [rendered, setRendered] = useState(false);
+    const { user, isAuthenticated, isLoading } = useAuth0();
+
 
     async function fetchData() {
-
-        let response = await fetch("http://localhost:8080/api/dailylog"); //await returns promise to allow to receive data "after the fact". fetch url for controller you receiving data from
+        if(isLoading) {
+            const timer = setTimeout(() => {
+            }, 1000);
+            return () => clearTimeout(timer);
+        }
+        let response = await fetch(`http://localhost:8080/api/dailylog/${user.email}`); //await returns promise to allow to receive data "after the fact". fetch url for controller you receiving data from
         let data = await response.json() //convert response to json
         .then( data => {
             setDailyLog(data)
@@ -32,13 +42,13 @@ export default function DailyLog() {
         fetchData();
         const timer = setTimeout(() => {
             setRendered(true);
-        }, 500);
+        }, 1000);
         return () => clearTimeout(timer);
     }, [rendered]);
 
     async function removeRecipeFromLog(recipeId) {
             try {
-                await fetch("http://localhost:8080/api/dailylog/removeRecipeFromLog/" + recipeId, {
+                await fetch(`http://localhost:8080/api/dailylog/${user.email}/removeRecipeFromLog/${recipeId}`, {
                     method: 'DELETE',
                 });
                 fetchData();
@@ -47,21 +57,23 @@ export default function DailyLog() {
             }
         }
 
-        if(loading) {
+        if(loading || isLoading) {
             return (
             <div>
             <p>Loading...</p>
             <Spinner animation='border'></Spinner>
             </div>
             )
-        };
+        } 
         return (
             <div className='dailyLog'>
                 <h1 id ='date'>{date}</h1>
                 <div id='calories'>Today's Calories: </div>
                 <h2>Today's Meals: </h2>
-                <DisplayDailyMeals todaysRecipes={todaysRecipes} removeRecipeFromLog={removeRecipeFromLog}/>                
+                {(rendered && todaysRecipes) && <DisplayDailyMeals todaysRecipes={todaysRecipes} removeRecipeFromLog={removeRecipeFromLog}/>}              
                 <EditLog setRefresh = {setRefresh} setRendered = {setRendered} />
+                <Card ><WeightInfo /></Card>
+                
             </div>
         )
 };
