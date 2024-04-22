@@ -31,10 +31,10 @@ public class IngredientServiceImpl implements IngredientService {
     public IngredientServiceImpl(){};
 
     @Override
-    public Ingredient findByName(IngredientDTO ingredientDTO) {
+    public Ingredient findByName(Ingredient anIngredient) {
         Iterable<Ingredient> allIngredients = ingredientRepository.findAll();
         for(Ingredient ingredient: allIngredients) {
-            if(ingredient.getName().equals(ingredientDTO.getName())) {
+            if(ingredient.getName().equals(anIngredient.getName())) {
                 return ingredient;
             }
         }
