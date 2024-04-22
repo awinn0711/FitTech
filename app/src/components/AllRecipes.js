@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom'
 import axios from 'axios';
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
@@ -34,11 +35,6 @@ export default function AllRecipes() {
         }
     };
 
-    const editRecipe = (recipeId) => {
-        // TODO - This opens a new tab. Change to redirect in current tab.
-        window.location.href = "/editrecipe/" + `${recipeId}`
-    };
-
     const recipeList = 
        
        <Table bordered hover>
@@ -56,7 +52,7 @@ export default function AllRecipes() {
                     <td>{recipe.description}</td>
                     <td>{recipe.ingr}</td>
                     <td>{recipe.calories}</td>
-                    <Button variant='outline-primary' size='sm' onClick={() => editRecipe(recipe.id)}>Edit</Button>
+                    <Button variant='outline-primary' size='sm' as={Link} to={`../editrecipe/${recipe.id}`}>Edit</Button>
                     <Button variant='outline-danger' size='sm' onClick={() => deleteRecipe(recipe.id)}>Delete</Button>
                 </tr>
             ))}
