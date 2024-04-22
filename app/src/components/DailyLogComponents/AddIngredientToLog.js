@@ -19,28 +19,15 @@ export default function AddIngredientToLog({setRendered}) {
         
     };
 
-    const handleSaveIngredient = () => {
-        if((ingrAmount < .1) || (ingrAmount < .5 && ingrUnit == "oz") || (ingrAmount <.5 && ingrAmount == "serving")) {
-            setErrorMessage("Ingredient amount is too small to measure nutrition facts. Please increase amount or ignore this ingredient.")
-            setIngrAmount(0);
-            return;
-        }
-        if (ingredientInput !== "") {
-            setErrorMessage("");
-            let newIngredient = `${ingrAmount} ${ingrUnit} ${ingredientInput}`;
-            console.log("newIngredient: ", newIngredient)
-            setSingleIngredient(newIngredient);
-            console.log("single ingredient: ", singleIngredient)
-        }
-
-        let ingrData = {
+    async function postIngredientData() {
+        const ingrData = {
             name: singleIngredient,
             category: "",
             calories: 0
         };
-        console.log("ingrData: ", ingrData);
+        console.log(ingrData);
 
-        fetch(`http://localhost:8080/api/dailylog/${user.email}/addIngredientToLog`, {
+        fetch("http://localhost:8080/api/dailylog/" + user.email + "/addIngredientToLog", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -59,7 +46,24 @@ export default function AddIngredientToLog({setRendered}) {
             console.error('Error saving ingredient:', error.message);
             setErrorMessage("Error saving ingredient. Please try again later.");
         });
-        setRendered(false)
+    };
+
+    const handleSaveIngredient = () => {
+        if((ingrAmount < .1) || (ingrAmount < .5 && ingrUnit == "oz") || (ingrAmount <.5 && ingrAmount == "serving")) {
+            setErrorMessage("Ingredient amount is too small to measure nutrition facts. Please increase amount or ignore this ingredient.")
+            setIngrAmount(0);
+            return;
+        }
+        if (ingredientInput !== "") {
+            setErrorMessage("");
+            let newIngredient = (`${ingrAmount} ${ingrUnit} ${ingredientInput}`);
+            console.log("new ingredient: ", newIngredient);
+            setSingleIngredient(newIngredient);
+            console.log("single ingredient: ", singleIngredient);
+        }
+        
+        postIngredientData();
+        setRendered(false);
     };
 
 
@@ -73,8 +77,8 @@ export default function AddIngredientToLog({setRendered}) {
             <form>
             <input type='number' value={ingrAmount} onChange={(e) => setIngrAmount(e.target.value)}/>
                     <select onChange={(e) => setIngrUnit(e.target.value)}>
-                        {units.map((unit) => (
-                            <option value={unit}>{unit}</option>
+                        {units.map((unit, index) => (
+                            <option key={index} value={unit}>{unit}</option>
                         ))}
                     </select>
                     <input type="text" value={ingredientInput} onChange={handleIngredientChange} />
