@@ -27,7 +27,7 @@ export default function DailyLog() {
             }, 1000);
             return () => clearTimeout(timer);
         }
-        let response = await fetch(`http://localhost:8080/api/dailylog/${user.email}`); //await returns promise to allow to receive data "after the fact". fetch url for controller you receiving data from
+        let response = await fetch('http://localhost:8080/api/dailylog/' + user.email); //await returns promise to allow to receive data "after the fact". fetch url for controller you receiving data from
         let data = await response.json() //convert response to json
         .then( data => {
             setDailyLog(data);
@@ -53,7 +53,7 @@ export default function DailyLog() {
 
     async function removeRecipeFromLog(recipeId) {
             try {
-                await fetch(`http://localhost:8080/api/dailylog/${user.email}/removeRecipeFromLog/${recipeId}`, {
+                await fetch('http://localhost:8080/api/dailylog/' + user.email + '/removeRecipeFromLog/' +recipeId, {
                     method: 'DELETE',
                 });
                 fetchData();
@@ -64,7 +64,7 @@ export default function DailyLog() {
 
         async function removeIngredientFromLog(ingredientId) {
             try {
-                await fetch(`http://localhost:8080/api/dailylog/${user.email}/removeIngredientFromLog/${ingredientId}`, {
+                await fetch('http://localhost:8080/api/dailylog/' + user.email + '/removeIngredientFromLog/' + ingredientId, {
                     method: 'DELETE',
                 });
                 fetchData();

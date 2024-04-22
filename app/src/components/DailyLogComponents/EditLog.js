@@ -27,7 +27,7 @@ export default function EditLog( {setRefresh, setRendered} ) {
     }
 
     const handleAddRecipeToLog = () => {
-        fetch(`http://localhost:8080/api/dailylog/${user.email}/addRecipeToLog`, {
+        fetch('http://localhost:8080/api/dailylog/' + user.email + '/addRecipeToLog', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
