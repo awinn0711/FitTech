@@ -6,6 +6,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import NavBar from './components/NavBar.js'
 import ProfilePicture from './components/ProfilePicture.js'
 import AuthLogin from './components/AuthLogin.js';
+//import background from "./background/FITTECH.jpg";
 
 
 
@@ -27,7 +28,9 @@ const { user, isAuthenticated, isLoading } = useAuth0();
 
 
     </div>
+
   );
+
 }
 
 export default Home;
