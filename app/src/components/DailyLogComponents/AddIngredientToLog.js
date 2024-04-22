@@ -6,7 +6,6 @@ export default function AddIngredientToLog({setRendered}) {
 
     const [loading, setLoading] = useState(false);
     const { user, isAuthenticated, isLoading } = useAuth0();
-    const [singleIngredient, setSingleIngredient] = useState("");
     const [ingrAmount, setIngrAmount] = useState(0);
     const [ingrUnit, setIngrUnit] = useState("");
     const [ingredientInput, setIngredientInput] = useState("");
@@ -21,7 +20,7 @@ export default function AddIngredientToLog({setRendered}) {
 
     async function postIngredientData() {
         const ingrData = {
-            name: singleIngredient,
+            name: `${ingrAmount} ${ingrUnit} ${ingredientInput}` ,
             category: "",
             calories: 0
         };
@@ -39,7 +38,6 @@ export default function AddIngredientToLog({setRendered}) {
                 throw new Error('Failed to save ingredient');
             }
             console.log('Ingredient added successfully');
-            setSingleIngredient("");
             setErrorMessage("");
         })
         .catch(error => {
@@ -56,10 +54,6 @@ export default function AddIngredientToLog({setRendered}) {
         }
         if (ingredientInput !== "") {
             setErrorMessage("");
-            let newIngredient = (`${ingrAmount} ${ingrUnit} ${ingredientInput}`);
-            console.log("new ingredient: ", newIngredient);
-            setSingleIngredient(newIngredient);
-            console.log("single ingredient: ", singleIngredient);
         }
         
         postIngredientData();
