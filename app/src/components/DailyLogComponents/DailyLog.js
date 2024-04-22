@@ -62,6 +62,17 @@ export default function DailyLog() {
             }
         }
 
+        async function removeIngredientFromLog(ingredientId) {
+            try {
+                await fetch(`http://localhost:8080/api/dailylog/${user.email}/removeIngredientFromLog/${ingredientId}`, {
+                    method: 'DELETE',
+                });
+                fetchData();
+            } catch (error) {
+                console.error('Error removing ingredient:', error);
+            }
+        }
+
         if(loading || isLoading) {
             return (
             <div>
@@ -75,7 +86,7 @@ export default function DailyLog() {
                 <h1 id ='date'>{date}</h1>
                 {(todaysIngredients && todaysRecipes) && <CalorieCounter todaysRecipes={todaysRecipes} todaysIngredients={todaysIngredients} />}
                 <h2>Today's Meals: </h2>
-                {(rendered && todaysRecipes && todaysIngredients) && <DisplayDailyMeals todaysIngredients={todaysIngredients} todaysRecipes={todaysRecipes} removeRecipeFromLog={removeRecipeFromLog}/>} 
+                {(rendered && todaysRecipes && todaysIngredients) && <DisplayDailyMeals todaysIngredients={todaysIngredients} todaysRecipes={todaysRecipes} removeRecipeFromLog={removeRecipeFromLog} removeIngredientFromLog={removeIngredientFromLog}/>} 
                 <h2>Add Meal to Today's Log</h2>
                 <AddIngredientToLog setRendered={setRendered} />             
                 <EditLog setRefresh = {setRefresh} setRendered = {setRendered} />

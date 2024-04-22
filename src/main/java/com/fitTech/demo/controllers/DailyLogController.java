@@ -115,6 +115,25 @@ public class DailyLogController {
         return ResponseEntity.ok(log);
     }
 
+    @DeleteMapping("/removeIngredientFromLog/{ingredientId}")
+    public ResponseEntity<Void> removeIngredientFromLog(@PathVariable String userEmail, @PathVariable int ingredientId) {
+        DateDTO checkDate = new DateDTO(LocalDate.now());
+        DailyLog log = dailyLogService.findByDateAndUser(checkDate, userEmail);
+
+        Optional<Ingredient> ingredientToRemoveOptional = log.getIngredients().stream()
+                .filter(ingredient -> ingredient.getId() == ingredientId)
+                .findFirst();
+
+        if (ingredientToRemoveOptional.isPresent()) {
+            Ingredient ingredientToRemove = ingredientToRemoveOptional.get();
+            log.getIngredients().remove(ingredientToRemove);
+            dailyLogRepository.save(log);
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
 
 
 }

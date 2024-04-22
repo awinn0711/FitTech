@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 
-export default function DisplayDailyMeals({todaysIngredients, todaysRecipes, removeRecipeFromLog}) {
+export default function DisplayDailyMeals({todaysIngredients, todaysRecipes, removeRecipeFromLog, removeIngredientFromLog}) {
 
     return (
         <div>
@@ -17,7 +17,7 @@ export default function DisplayDailyMeals({todaysIngredients, todaysRecipes, rem
                 {todaysIngredients.map((ingredient) => (
                     <li key={ingredient.id}>
                         {ingredient.name}
-                        <Button variant="danger" >
+                        <Button variant="danger" onClick={() => removeIngredientFromLog(ingredient.id)}>
                             Remove
                         </Button>
                     </li>
