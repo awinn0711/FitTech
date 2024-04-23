@@ -16,16 +16,25 @@ public class FileStorageServiceImpl implements FileStorageService {
 
     @Autowired
     private FileDataRepository fileDataRepository;
-    public FileData store(MultipartFile file) throws IOException {
+    public FileData store(MultipartFile file, String userEmail) throws IOException {
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-        FileData FileData = new FileData(fileName, file.getContentType(), file.getBytes());
-
-        return fileDataRepository.save(FileData);
+        FileData fileData = new FileData(fileName, file.getContentType(), file.getBytes());
+        fileData.setUserEmail(userEmail);
+        return fileDataRepository.save(fileData);
     }
 
     @Override
     public  FileData getFile(String id) {
         return fileDataRepository.findById(id).get();
+    }
+
+    @Override
+    public  FileData getFilebyuserEmail(String userEmail) {
+        for (FileData file: fileDataRepository.findAll()){
+            if (file.getUserEmail().equals(userEmail)) {
+                return file;
+            }
+        } return null;
     }
 
     @Override

@@ -14,10 +14,12 @@ import java.util.stream.Stream;
 public interface FileStorageService {
 
 
-    FileData store(MultipartFile file)throws IOException;
+    FileData store(MultipartFile file, String userEmail)throws IOException;
 
 
     FileData getFile(String id);
+
+    FileData getFilebyuserEmail (String userEmail);
 
     Stream<FileData> getAllFiles();
 
