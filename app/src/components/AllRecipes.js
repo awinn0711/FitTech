@@ -37,7 +37,7 @@ export default function AllRecipes() {
 
     const recipeList = 
        
-       <Table bordered hover>
+       <Table bordered hover responsive>
         <tr>
             <th>Name</th>
             <th>Description</th>

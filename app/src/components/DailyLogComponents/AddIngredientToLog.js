@@ -67,6 +67,7 @@ export default function AddIngredientToLog({setRendered}) {
 
     return (
         <div>
+            <p>Enter a measurable food, i.e. 2 eggs, 1 cup rice, etc.</p>
             {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
             <form>
             <input type='number' value={ingrAmount} onChange={(e) => setIngrAmount(e.target.value)}/>

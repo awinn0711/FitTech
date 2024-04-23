@@ -6,13 +6,6 @@ export default function CalorieCounter({todaysRecipes, todaysIngredients}) {
 
 
     useEffect(() => {
-        // for(let i = 0; i < todaysRecipes.length; i++) {
-        //     setCalories(calories + (todaysRecipes[i].calories));
-        // }
-    
-        // for(let i = 0; i < todaysIngredients.length; i++) {
-        //     setCalories(calories + (todaysIngredients[i].calories));
-        // }
         let counter = 0;
         todaysIngredients.map((ingredient) => {
             counter = (counter + ingredient.calories)
@@ -26,9 +19,7 @@ export default function CalorieCounter({todaysRecipes, todaysIngredients}) {
 
 
     return(
-        <div>
-            <h1>Calories: {calories}</h1>
-        </div>
+        <>{calories}</>
     )
 
 }

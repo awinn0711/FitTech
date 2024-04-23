@@ -5,6 +5,9 @@ import DisplayDailyMeals from './DisplayDailyMeals';
 import Button from 'react-bootstrap/Button';
 import Spinner from 'react-bootstrap/Spinner';
 import Card from 'react-bootstrap/Card';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 import WeightInfo from '../WeightComponents/WeightInfo';
 import AddIngredientToLog from './AddIngredientToLog';
 import CalorieCounter from './CalorieCounter';
@@ -84,14 +87,38 @@ export default function DailyLog() {
         return (
             <div className='dailyLog'>
                 <h1 id ='date'>{date}</h1>
-                {(todaysIngredients && todaysRecipes) && <CalorieCounter todaysRecipes={todaysRecipes} todaysIngredients={todaysIngredients} />}
-                <h2>Today's Meals: </h2>
-                {(rendered && todaysRecipes && todaysIngredients) && <DisplayDailyMeals todaysIngredients={todaysIngredients} todaysRecipes={todaysRecipes} removeRecipeFromLog={removeRecipeFromLog} removeIngredientFromLog={removeIngredientFromLog}/>} 
-                <h2>Add Meal to Today's Log</h2>
-                <AddIngredientToLog setRendered={setRendered} />             
-                <EditLog setRefresh = {setRefresh} setRendered = {setRendered} />
-                <div><Card style={{ width: '28rem' }} bg='info'><WeightInfo /></Card></div>
-                
+                {(todaysIngredients && todaysRecipes) && 
+                <h1 className='text-align-center'>Today's Calories: <CalorieCounter todaysRecipes={todaysRecipes} todaysIngredients={todaysIngredients} /></h1>}
+                <Container>
+                    <Row>
+                        <Col>
+                            <Card style={{ width: '28rem' }} bg='info'>
+                                <Card.Header as="h2">Log Food</Card.Header>
+                                <Card.Body>
+                            <       AddIngredientToLog setRendered={setRendered} />             
+                                    <br></br><EditLog setRefresh = {setRefresh} setRendered = {setRendered} />   
+                                </Card.Body>
+                            </Card>
+                        </Col>
+                        <Col>
+                            <Card style={{ width: '28rem' }} bg='info'>
+                                <Card.Header as="h2">Today's Meals</Card.Header>
+                                <Card.Body>
+                                {(rendered && todaysRecipes && todaysIngredients) && <DisplayDailyMeals todaysIngredients={todaysIngredients} todaysRecipes={todaysRecipes} removeRecipeFromLog={removeRecipeFromLog} removeIngredientFromLog={removeIngredientFromLog}/>} 
+                                </Card.Body>
+                             </Card>
+                        </Col>
+                    </Row><br></br>
+                    <Row>
+                        <Col>
+                            <Card style={{ width: '28rem' }} bg='info'>
+                                <Card.Body>
+                                    <WeightInfo />
+                                </Card.Body>
+                            </Card>
+                        </Col>
+                    </Row>
+                </Container> 
             </div>
         )
 };

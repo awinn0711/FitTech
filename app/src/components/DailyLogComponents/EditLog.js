@@ -60,7 +60,7 @@ export default function EditLog( {setRefresh, setRendered} ) {
     return (
         <div>
             <form>
-            <label htmlFor="recipes">Choose a recipe:</label>
+            <label htmlFor="recipes">Choose from saved recipes:</label>
                 <select id="recipes" onChange={handleSelectRecipe}>
                     <option value={null}>Saved Recipes</option>
                     {recipes.map((recipe) => (
