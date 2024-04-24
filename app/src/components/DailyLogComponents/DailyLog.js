@@ -85,7 +85,7 @@ export default function DailyLog() {
             )
         } 
         return (
-            <div className='dailyLog'>
+            <div>
                 <h1 id ='date'>{date}</h1>
                 {(todaysIngredients && todaysRecipes) && 
                 <h1 className='text-align-center'>Today's Calories: <CalorieCounter todaysRecipes={todaysRecipes} todaysIngredients={todaysIngredients} /></h1>}
