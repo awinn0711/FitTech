@@ -4,10 +4,12 @@ import axios from 'axios';
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import Spinner from 'react-bootstrap/Spinner';
+import { useAuth0 } from "@auth0/auth0-react";
 
 export default function AllRecipes() {
     const [recipes, setRecipes] = useState([]);
     const [loading, setLoading] = useState(false);
+    const { user, isAuthenticated, isLoading } = useAuth0();
 
     useEffect(() => {
         setLoading(true);
@@ -16,7 +18,7 @@ export default function AllRecipes() {
 
     const fetchRecipes = async () => {
         try {
-            const response = await fetch('http://localhost:8080/api/recipes/all');
+            const response = await fetch('http://localhost:8080/api/recipes/all/' + user.email);
             const data = await response.json();
             setRecipes(data);
             setLoading(false);
