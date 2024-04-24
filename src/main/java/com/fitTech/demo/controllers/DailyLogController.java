@@ -18,6 +18,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 //@CrossOrigin(origins = "http://localhost:8080")//bc frontend and backend are running on different servers, this annotation allows frontend to fetch data from another server
@@ -59,6 +61,12 @@ public class DailyLogController {
             todaysLog = result.get();
             return ResponseEntity.ok().body(todaysLog);
         }
+    }
+
+    @GetMapping("getall")
+    public ResponseEntity<List<DailyLog>> allLogs(@PathVariable String userEmail) {
+        List<DailyLog> dailyLogList = dailyLogService.getAllLogsByUser(userEmail);
+        return ResponseEntity.ok().body(dailyLogList);
     }
 
     @PostMapping("addRecipeToLog")
