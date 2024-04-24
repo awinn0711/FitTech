@@ -8,6 +8,8 @@ export default function ProfilePicture() {
   const { user, isAuthenticated, isLoading } = useAuth0();
    const [profile, setProfile] = useState(null);
 
+
+
 async function displayPicture() {
   try {
         const response = await axios.get('/upload/files/' + user.email);

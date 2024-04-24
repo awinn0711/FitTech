@@ -12,11 +12,18 @@ import AllRecipes from './components/AllRecipes';
 import EditRecipe from './components/EditRecipe'
 import NavBar from './components/NavBar.js'
 import background from './background/AppHomePage.png'
+import { useAuth0 } from "@auth0/auth0-react";
 
 
 const baseUrl = process.env.REACT_APP_BASEURL;
 
+
+
 const App = () => {
+const { user, isAuthenticated, isLoading } = useAuth0();
+  if (!isAuthenticated) {
+    return <div><AuthLogin /> </div>;
+  }
   return (
     <Router>
 
