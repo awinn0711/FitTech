@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useAuth0 } from "@auth0/auth0-react";
 
@@ -6,14 +6,22 @@ export default function ProfilePicture() {
   const [selectedFile, setSelectedFile] = useState(null);
   const [previewUrl, setPreviewUrl] = useState('');
   const { user, isAuthenticated, isLoading } = useAuth0();
-   const [profile, setProfile] = useState(null);
+   const [profileURL, setProfileURL] = useState(null);
 
-
+useEffect(() => {
+  displayPicture();
+},[])
 
 async function displayPicture() {
   try {
-        const response = await axios.get('/upload/files/' + user.email);
-        setProfile(response);
+        const response = await axios.get('files/' + user.email);
+        const binaryData = [];
+        binaryData.push(response.data);
+        console.log(binaryData);
+        const imgBlob = new Blob(binaryData, {type: 'img/png'})
+        const imgURL = URL.createObjectURL(imgBlob);
+        setProfileURL(imgURL);
+        console.log(imgURL);
       } catch (error) {
         console.error('Error displaying the image:', error);
       }
@@ -44,9 +52,9 @@ async function displayPicture() {
 return (
     <div>
       <input type="file" onChange={handleFileChange} />
-      {previewUrl && <img src={previewUrl} alt="Preview" />}
+      {previewUrl && <img src={previewUrl} width='400' alt="Preview" />}
       <button onClick={handleUpload}>Upload Image</button>
-      {profile}
+      <img src={profileURL} width='400'></img>
     </div>
   );
  };
