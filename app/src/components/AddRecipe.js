@@ -101,7 +101,7 @@ export default function AddRecipe() {
                 </label>
                 <br />
                     {(ingredientsList.length > 0) && 
-                        <Table>
+                        <Table responsive>
                             <thead>
                                 <tr>
                                 <th>Ingredients</th>

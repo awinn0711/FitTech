@@ -12,6 +12,7 @@ import AllRecipes from './components/AllRecipes';
 import EditRecipe from './components/EditRecipe'
 import NavBar from './components/NavBar.js'
 import background from './background/AppHomePage.png'
+import LogHistory from './components/DailyLogComponents/LogHistory.js';
 
 
 const baseUrl = process.env.REACT_APP_BASEURL;
@@ -32,6 +33,7 @@ const App = () => {
         <Route exact path="/profile" element={<AuthProfile />} />
         <Route exact path="/logout" element={<AuthLogout />} />
         <Route path="/editrecipe/:recipeId" element={<EditRecipe />} />
+        <Route path="/loghistory" element={<LogHistory />} />
        </Routes>
       </div>
 

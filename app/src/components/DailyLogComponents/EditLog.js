@@ -13,7 +13,7 @@ export default function EditLog( {setRefresh, setRendered} ) {
 
 
     async function loadRecipes() {
-        let response = await fetch('http://localhost:8080/api/recipes/all');
+        let response = await fetch('http://localhost:8080/api/recipes/all/' + user.email);
         let data = await response.json()
         .then(data => {
             setRecipes(data);
@@ -60,7 +60,7 @@ export default function EditLog( {setRefresh, setRendered} ) {
     return (
         <div>
             <form>
-            <label htmlFor="recipes">Choose a recipe:</label>
+            <label htmlFor="recipes">Choose from saved recipes:</label>
                 <select id="recipes" onChange={handleSelectRecipe}>
                     <option value={null}>Saved Recipes</option>
                     {recipes.map((recipe) => (

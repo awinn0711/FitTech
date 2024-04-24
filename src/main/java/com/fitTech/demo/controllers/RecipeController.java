@@ -28,10 +28,9 @@ public class RecipeController {
         this.recipeRepository = recipeRepository;
     }
 
-    @GetMapping("all")
-    public ResponseEntity<List<Recipe>> recipes() {
-        List<Recipe> recipeList = new ArrayList<>();
-        recipeRepository.findAll().forEach(recipeList::add);
+    @GetMapping("/all/{userEmail}")
+    public ResponseEntity<List<Recipe>> recipes(@PathVariable String userEmail) {
+        List<Recipe> recipeList = recipeService.getAllByUser(userEmail);
         return ResponseEntity.ok().body(recipeList);
     }
 

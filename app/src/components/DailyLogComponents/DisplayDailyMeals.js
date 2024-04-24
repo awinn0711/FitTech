@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
+import CalorieCounter from './CalorieCounter';
 
 export default function DisplayDailyMeals({todaysIngredients, todaysRecipes, removeRecipeFromLog, removeIngredientFromLog}) {
+
 
     return (
         <div>
@@ -9,7 +11,8 @@ export default function DisplayDailyMeals({todaysIngredients, todaysRecipes, rem
                 {todaysRecipes.map((recipe) => (
                     <li key={recipe.id}>
                         {recipe.name}
-                        <Button variant="danger" onClick={() => removeRecipeFromLog(recipe.id)}>
+                        <>({recipe.calories} calories)</>
+                        <Button size='sm' variant="danger" onClick={() => removeRecipeFromLog(recipe.id)}>
                             Remove
                         </Button>
                     </li>
@@ -17,7 +20,8 @@ export default function DisplayDailyMeals({todaysIngredients, todaysRecipes, rem
                 {todaysIngredients.map((ingredient) => (
                     <li key={ingredient.id}>
                         {ingredient.name}
-                        <Button variant="danger" onClick={() => removeIngredientFromLog(ingredient.id)}>
+                        <>({ingredient.calories} calories)</>
+                        <Button size='sm' variant="danger" onClick={() => removeIngredientFromLog(ingredient.id)}>
                             Remove
                         </Button>
                     </li>

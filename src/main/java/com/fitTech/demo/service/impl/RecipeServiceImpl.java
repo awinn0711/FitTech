@@ -12,7 +12,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 @Service
 public class RecipeServiceImpl implements RecipeService {
@@ -25,6 +27,7 @@ public class RecipeServiceImpl implements RecipeService {
     @Autowired
     RestTemplate restTemplate;
 
+    @Autowired
     private RecipeRepository recipeRepository;
 
     public RecipeServiceImpl(){};
@@ -40,5 +43,17 @@ public class RecipeServiceImpl implements RecipeService {
 
         nutritionFactsDTO.setNutritionFacts(response.getBody());
         return nutritionFactsDTO;
-    };
+    }
+
+    @Override
+    public List<Recipe> getAllByUser(String userEmail) {
+        List<Recipe> recipeList = new ArrayList<>();
+        for(Recipe recipe : recipeRepository.findAll()) {
+            if(recipe.getUserEmail().equals(userEmail)) {
+                recipeList.add(recipe);
+            }
+        } return recipeList;
+    }
+
+    ;
 }
