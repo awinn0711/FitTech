@@ -6,7 +6,7 @@ export default function ProfilePicture() {
   const [selectedFile, setSelectedFile] = useState(null);
   const [previewUrl, setPreviewUrl] = useState('');
   const { user, isAuthenticated, isLoading } = useAuth0();
-   const [profileURL, setProfileURL] = useState(null);
+   const [profileURL, setProfileURL] = useState('');
 
 useEffect(() => {
   displayPicture();
@@ -14,7 +14,8 @@ useEffect(() => {
 
 async function displayPicture() {
   try {
-        const response = await axios.get('files/' + user.email);
+        const response = await axios.get('files/' + user.email, {responseType: "blob"});
+        console.log(response);
         const binaryData = [];
         binaryData.push(response.data);
         console.log(binaryData);
@@ -54,7 +55,7 @@ return (
       <input type="file" onChange={handleFileChange} />
       {previewUrl && <img src={previewUrl} width='400' alt="Preview" />}
       <button onClick={handleUpload}>Upload Image</button>
-      <img src={profileURL} width='400'></img>
+      {profileURL && <img src={profileURL} width='400'></img>}
     </div>
   );
  };
