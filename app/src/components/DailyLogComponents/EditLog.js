@@ -13,7 +13,7 @@ export default function EditLog( {setRefresh, setRendered} ) {
 
 
     async function loadRecipes() {
-        let response = await fetch('http://localhost:8080/api/recipes/all');
+        let response = await fetch('http://localhost:8080/api/recipes/all/' + user.email);
         let data = await response.json()
         .then(data => {
             setRecipes(data);
@@ -27,7 +27,7 @@ export default function EditLog( {setRefresh, setRendered} ) {
     }
 
     const handleAddRecipeToLog = () => {
-        fetch(`http://localhost:8080/api/dailylog/${user.email}/addRecipeToLog`, {
+        fetch('http://localhost:8080/api/dailylog/' + user.email + '/addRecipeToLog', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -51,7 +51,6 @@ export default function EditLog( {setRefresh, setRendered} ) {
     useEffect(() => {
         setLoading(true);
         loadRecipes();
-        console.log("recipeToAdd: ", recipeToAdd);
     }, [recipeToAdd]);
 
     if(loading) {
@@ -60,9 +59,8 @@ export default function EditLog( {setRefresh, setRendered} ) {
 
     return (
         <div>
-            <h2>Add Meal to Today's Log</h2>
             <form>
-            <label htmlFor="recipes">Choose a recipe:</label>
+            <label htmlFor="recipes">Choose from saved recipes:</label>
                 <select id="recipes" onChange={handleSelectRecipe}>
                     <option value={null}>Saved Recipes</option>
                     {recipes.map((recipe) => (

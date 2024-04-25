@@ -18,6 +18,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 //@CrossOrigin(origins = "http://localhost:8080")//bc frontend and backend are running on different servers, this annotation allows frontend to fetch data from another server
@@ -61,6 +63,12 @@ public class DailyLogController {
         }
     }
 
+    @GetMapping("getall")
+    public ResponseEntity<List<DailyLog>> allLogs(@PathVariable String userEmail) {
+        List<DailyLog> dailyLogList = dailyLogService.getAllLogsByUser(userEmail);
+        return ResponseEntity.ok().body(dailyLogList);
+    }
+
     @PostMapping("addRecipeToLog")
     public ResponseEntity<DailyLog> addRecipeToLog(@PathVariable String userEmail, @RequestBody Recipe recipe) {
         DateDTO checkDate = new DateDTO(LocalDate.now());
@@ -96,11 +104,11 @@ public class DailyLogController {
     }
 
     @PostMapping("addIngredientToLog")
-    public ResponseEntity<DailyLog> addIngredientToLog(@PathVariable String userEmail, @RequestBody IngredientDTO ingredientDTO) {
+    public ResponseEntity<DailyLog> addIngredientToLog(@PathVariable String userEmail, @RequestBody Ingredient anIngredient) {
         Ingredient newIngredient;
-        Optional<Ingredient> result = Optional.ofNullable(ingredientService.findByName(ingredientDTO));
+        Optional<Ingredient> result = Optional.ofNullable(ingredientService.findByName(anIngredient));
         if(result.isEmpty()) {
-            newIngredient = new Ingredient(ingredientDTO.getName());
+            newIngredient = new Ingredient(anIngredient.getName());
             ingredientRepository.save(newIngredient);
         } else {
             newIngredient = result.get();
@@ -113,6 +121,25 @@ public class DailyLogController {
         newIngredient.setCalories(nutritionFactsDTO.nutritionFacts.get("calories"));
         dailyLogService.addIngredientToLog(log, newIngredient);
         return ResponseEntity.ok(log);
+    }
+
+    @DeleteMapping("/removeIngredientFromLog/{ingredientId}")
+    public ResponseEntity<Void> removeIngredientFromLog(@PathVariable String userEmail, @PathVariable int ingredientId) {
+        DateDTO checkDate = new DateDTO(LocalDate.now());
+        DailyLog log = dailyLogService.findByDateAndUser(checkDate, userEmail);
+
+        Optional<Ingredient> ingredientToRemoveOptional = log.getIngredients().stream()
+                .filter(ingredient -> ingredient.getId() == ingredientId)
+                .findFirst();
+
+        if (ingredientToRemoveOptional.isPresent()) {
+            Ingredient ingredientToRemove = ingredientToRemoveOptional.get();
+            log.getIngredients().remove(ingredientToRemove);
+            dailyLogRepository.save(log);
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
 

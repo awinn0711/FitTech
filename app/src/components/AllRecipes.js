@@ -4,10 +4,12 @@ import axios from 'axios';
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import Spinner from 'react-bootstrap/Spinner';
+import { useAuth0 } from "@auth0/auth0-react";
 
 export default function AllRecipes() {
     const [recipes, setRecipes] = useState([]);
     const [loading, setLoading] = useState(false);
+    const { user, isAuthenticated, isLoading } = useAuth0();
 
     useEffect(() => {
         setLoading(true);
@@ -16,7 +18,7 @@ export default function AllRecipes() {
 
     const fetchRecipes = async () => {
         try {
-            const response = await fetch('http://localhost:8080/api/recipes/all');
+            const response = await fetch('http://localhost:8080/api/recipes/all/' + user.email);
             const data = await response.json();
             setRecipes(data);
             setLoading(false);
@@ -32,12 +34,14 @@ export default function AllRecipes() {
             setRecipes(recipes.filter(recipe => recipe.id !== recipeId));
         } catch (error) {
             console.error('Error deleting recipe:', error);
+            window.alert('Cannot delete recipe as it would alter calorie count for previous days.')
         }
+
     };
 
     const recipeList = 
        
-       <Table bordered hover>
+       <Table bordered hover responsive>
         <tr>
             <th>Name</th>
             <th>Description</th>
@@ -50,7 +54,7 @@ export default function AllRecipes() {
                 <tr key={recipe.id}>
                     <td>{recipe.name}</td>
                     <td>{recipe.description}</td>
-                    <td>{recipe.ingr}</td>
+                    <td>{recipe.ingr.map((ingr) => (<>{ingr}, </>))}</td>
                     <td>{recipe.calories}</td>
                     <Button variant='outline-primary' size='sm' as={Link} to={`../editrecipe/${recipe.id}`}>Edit</Button>
                     <Button variant='outline-danger' size='sm' onClick={() => deleteRecipe(recipe.id)}>Delete</Button>

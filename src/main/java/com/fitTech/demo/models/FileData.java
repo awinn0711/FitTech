@@ -3,6 +3,8 @@ package com.fitTech.demo.models;
 import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
 
+import java.sql.Blob;
+
 @Entity
 @Table(name = "files")
 public class FileData {
@@ -11,11 +13,14 @@ public class FileData {
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
 
+    private String userEmail;
+
     private String name;
 
     private String type;
 
     @Lob
+    @Column(columnDefinition = "LONGBLOB")
     private byte[] data;
 
     public FileData() {
@@ -29,6 +34,14 @@ public class FileData {
 
     public String getId() {
         return id;
+    }
+
+    public String getUserEmail() {
+        return userEmail;
+    }
+
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
     }
 
     public String getName() {
