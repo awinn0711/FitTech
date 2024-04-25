@@ -21,11 +21,13 @@ public class Feedback {
 
     //public Date date;
 
+    private String feedbackType;
+
     public Feedback() {
 
     }
 
-    public Feedback(String userEmail, String description) {
+    public Feedback(String userEmail, String description, String feedbackType) {
         //this.date = date;
         this.userEmail = userEmail;
         this.description = description;
@@ -45,5 +47,13 @@ public class Feedback {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getFeedbackType() {
+        return feedbackType;
+    }
+
+    public void setFeedbackType(String feedbackType) {
+        this.feedbackType = feedbackType;
     }
 }
