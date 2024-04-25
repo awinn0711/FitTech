@@ -49,7 +49,7 @@ const Feedback = () => {
                 </p>
             )}
             <form onSubmit={handleSubmit}>
-                <div className="card" style={{ width: '28rem', backgroundColor: 'info', margin: 'auto' }}>
+                <div className="card" style={{ width: '28rem', backgroundColor: '#17a2b8', margin: 'auto' }}>
                     <div className="card-header"><h2 style={{ color: 'white' }}>Feedback Form</h2></div>
                     <div className="card-body">
                         <small>Experiencing a problem or want to offer feedback? Please complete the following form and be detailed in your request.

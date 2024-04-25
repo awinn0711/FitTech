@@ -92,42 +92,53 @@ const EditRecipe = () => {
     } else {
         return (
             <div>
-              <h2>Edit Recipe</h2>
-              {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
-              {successMessage && <p style={{ color: 'green' }}>{successMessage}</p>}
-              <form>
-                <label>
-                  Recipe Name:
-                  <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
-                </label>
-                <br />
-                <label>
-                  Description:
-                  <textarea value={description} onChange={(e) => setDescription(e.target.value)} />
-                </label>
-                <br />
+              <div className="card" style={{ width: '28rem', backgroundColor: '#17a2b8', margin: 'auto' }}>
+                <div className="card-header"><h2 style={{ color: 'white' }}>Edit Recipe</h2></div>
+                <div className="card-body">
+                  {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
+                  {successMessage && <p style={{ color: 'green' }}>{successMessage}</p>}
+                  <form>
+                    <label style={{ color: 'white' }}>
+                      Recipe Name:
+                      <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="form-control" />
+                    </label>
+                    <br />
+                    <label style={{ color: 'white' }}>
+                      Description:
+                      <textarea value={description} onChange={(e) => setDescription(e.target.value)} className="form-control" />
+                    </label>
+                    <br />
                     {ingredientsList.map((ingredient, index) => (
                         <div key={index}>{ingredient}</div>
                     ))}
-
-                <label>
-                  <input type='number' value={ingrAmount} onChange={(e) => setIngrAmount(e.target.value)} />
-                  <select onChange={(e) => setIngrUnit(e.target.value)}>
-                    <option value=" "> </option>
-                    <option value="grams">grams</option>
-                    <option value="oz">oz</option>
-                    <option value="lbs">lbs</option>
-                    <option value="serving">serving</option>
-                  </select>
-                  <input type="text" value={ingredientInput} onChange={handleIngredientChange} />
-                  <Button variant='primary' onClick={handleAddIngredient}>Add Ingredient</Button>
-                </label>
-                <br />
-                <p><Button variant='success' onClick={handleSaveChanges}>Save Changes</Button></p>
-              </form>
+                    <label style={{ color: 'white' }}>
+                        Amount:
+                        <input type='number' value={ingrAmount} onChange={(e) => setIngrAmount(e.target.value)} className="form-control" />
+                    </label>
+                    <br />
+                    <label style={{ color: 'white' }}>
+                        Unit:
+                        <select onChange={(e) => setIngrUnit(e.target.value)} className="form-control">
+                            <option value=" "> </option>
+                            <option value="grams">grams</option>
+                            <option value="oz">oz</option>
+                            <option value="lbs">lbs</option>
+                            <option value="serving">serving</option>
+                        </select>
+                    </label>
+                    <br />
+                    <label style={{ color: 'white' }}>
+                        Ingredient:
+                        <input type="text" value={ingredientInput} onChange={handleIngredientChange} className="form-control" />
+                        <Button variant='primary' onClick={handleAddIngredient}>Add Ingredient</Button>
+                    </label>
+                    <br />
+                    <p><Button variant='success' onClick={handleSaveChanges}>Save Changes</Button></p>
+                  </form>
+                </div>
+              </div>
             </div>
           );
-
     }
 };
 
