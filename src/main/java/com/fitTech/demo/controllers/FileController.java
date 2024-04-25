@@ -27,11 +27,12 @@ public class FileController {
     @Autowired
     private FileStorageService storageService;
 
-    @PostMapping("/upload")
-    public ResponseEntity<ResponseMessage> uploadFile(@RequestParam("file") MultipartFile file) {
+    @PostMapping("/upload/{userEmail}")
+    public ResponseEntity<ResponseMessage> uploadFile(@RequestParam("file") MultipartFile file, @PathVariable String userEmail) {
         String message = "";
         try {
-            storageService.store(file);
+
+            storageService.store(file, userEmail);
 
             message = "Uploaded the file successfully: " + file.getOriginalFilename();
             return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));
@@ -60,9 +61,9 @@ public class FileController {
         return ResponseEntity.status(HttpStatus.OK).body(files);
     }
 
-    @GetMapping("/files/{id}")
-    public ResponseEntity<byte[]> getFile(@PathVariable String id) {
-        FileData fileData = storageService.getFile(id);
+    @GetMapping("/files/{userEmail}")
+    public ResponseEntity<byte[]> getFile(@PathVariable String userEmail) {
+        FileData fileData = storageService.getFilebyuserEmail(userEmail);
 
         return ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileData.getName() + "\"")

@@ -11,13 +11,7 @@ import AuthLogin from './components/AuthLogin.js';
 
 
 const Home = () => {
-
 const { user, isAuthenticated, isLoading } = useAuth0();
-
-  if (!isAuthenticated) {
-    return <div><AuthLogin /> </div>;
-  }
-
 
   return (
     <div>

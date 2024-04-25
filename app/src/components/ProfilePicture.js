@@ -1,22 +1,46 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useAuth0 } from "@auth0/auth0-react";
 
-function ProfilePicture() {
+export default function ProfilePicture() {
   const [selectedFile, setSelectedFile] = useState(null);
   const [previewUrl, setPreviewUrl] = useState('');
+  const { user, isAuthenticated, isLoading } = useAuth0();
+   const [profileURL, setProfileURL] = useState('');
 
+useEffect(() => {
+  displayPicture();
+},[])
+
+async function displayPicture() {
+  try {
+        const response = await axios.get('files/' + user.email, {responseType: "blob"});
+        console.log(response);
+        const binaryData = [];
+        binaryData.push(response.data);
+        console.log(binaryData);
+        const imgBlob = new Blob(binaryData, {type: 'img/png'})
+        const imgURL = URL.createObjectURL(imgBlob);
+        setProfileURL(imgURL);
+        console.log(imgURL);
+      } catch (error) {
+        console.error('Error displaying the image:', error);
+      }
+
+};
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     setSelectedFile(file);
     setPreviewUrl(URL.createObjectURL(file));
   };
 
+
   const handleUpload = async () => {
     const formData = new FormData();
-    formData.append('image', selectedFile);
+    formData.append('file', selectedFile);
 
     try {
-      const response = await axios.post('/upload', formData, {
+      const response = await axios.post('/upload/' + user.email, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -25,67 +49,18 @@ function ProfilePicture() {
     } catch (error) {
       console.error('Error uploading the image:', error);
     }
-  };
-
-  return (
+}
+return (
     <div>
       <input type="file" onChange={handleFileChange} />
-      {previewUrl && <img src={previewUrl} alt="Preview" />}
+      {previewUrl && <img src={previewUrl} width='400' alt="Preview" />}
       <button onClick={handleUpload}>Upload Image</button>
+      {profileURL && <img src={profileURL} width='400'></img>}
     </div>
   );
-}
+ };
 
 
 
-//const [file, setFile] = useState();
-//    function handleChange(e) {
-//        console.log(e.target.files);
-//        setFile(URL.createObjectURL(e.target.files[0]));
-//    }
-//
-//    return (
-//        <div className="App">
-//            <h1>Add Image:</h1>
-//            <input type="file" onChange={handleChange} />
-//            <img src={file} />
-//        </div>
-//    );
-//    const[file, setFile] = useState()
-//
-//    function handleFile(event) {
-//        setFile(event.target.files[0])
-//        console.log(event.target.files[0])
-//    }
-//    function handleUpload() {
-//        const formData = new FormData()
-//        formData.append('file', file)
-//        fetch(
-//            'url',
-//            {
-//                method: "POST",
-//                body: formData
-//
-//            }
-//        ).then((response) => response.json()).then(
-//            (result) => {
-//                console.log('success', result)
-//            }
-//        )
-//        .catch(error => {
-//            console.error("Error:", error)
-//        })
-//    }
-//    return (
-//    <div className="App">
-//    <form onSubmit={handleUpload}>
-//        <input type="file" name="file" onChange={handleFile}/>
-//        <button onClick={handleUpload}>Upload</button>
-//    </form>
-//    </div>
-//
-//    );
 
 
-
-export default ProfilePicture;
