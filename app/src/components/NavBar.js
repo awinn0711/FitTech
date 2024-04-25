@@ -19,7 +19,7 @@ const { user, isAuthenticated, isLoading } = useAuth0();
                   <p><Link to="allrecipes">View All Recipes</Link></p>
                    <p><Link to="profile">View Profile</Link></p>
                    <p><Link to="logout">LogOut</Link></p>
-
+                  <p><Link to="feedback">Feedback</Link></p>
               </div>
 
 

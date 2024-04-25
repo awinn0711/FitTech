@@ -11,6 +11,7 @@ import DailyLog from './components/DailyLogComponents/DailyLog';
 import AllRecipes from './components/AllRecipes';
 import EditRecipe from './components/EditRecipe'
 import NavBar from './components/NavBar.js'
+import Feedback from './components/Feedback.js'
 import background from './background/AppHomePage.png'
 import { useAuth0 } from "@auth0/auth0-react";
 import LogHistory from './components/DailyLogComponents/LogHistory.js';
@@ -40,12 +41,12 @@ const { user, isAuthenticated, isLoading } = useAuth0();
         <Route exact path="/profile" element={<AuthProfile />} />
         <Route exact path="/logout" element={<AuthLogout />} />
         <Route path="/editrecipe/:recipeId" element={<EditRecipe />} />
+        <Route exact path="/feedback" element={<Feedback />} />
         <Route path="/loghistory" element={<LogHistory />} />
        </Routes>
       </div>
 
     </Router>
-
   );
 }
 
