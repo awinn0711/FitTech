@@ -9,9 +9,23 @@ const Feedback = () => {
     const [description, setDescription] = useState("");
     const [feedbackType, setFeedbackType] = useState("");
     const [submitted, setSubmitted] = useState(null);
+    const [errorMessage, setErrorMessage] = useState("");
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        if (feedbackType === "") {
+            setErrorMessage("Feedback type is required.");
+            return;
+        } else {
+            setErrorMessage("");
+        }
+
+        if (description.trim() === "") {
+            setErrorMessage("Description cannot be blank.");
+            return;
+        }
+
         try {
             await axios.post("/api/feedback/submit", {
                 userEmail: user.email,
@@ -20,7 +34,7 @@ const Feedback = () => {
             });
             setSubmitted(true);
         } catch (error) {
-            console.error("Error submitting feedback:", error);
+            setErrorMessage("Error submitting feedback.");
             setSubmitted(false);
         }
     };
@@ -28,18 +42,25 @@ const Feedback = () => {
     return (
         <div>
             <h2>Feedback Form</h2>
+            <small>Experiencing a problem or want to offer feedback? Please complete the following form and be detailed in your request.
+                You will receive a reply from an administrator to the email associated with your account as soon as possible.</small>
             {submitted !== null && (
               <p style={{ color: submitted ? 'green' : 'red' }}>
               {submitted ? 'Feedback submitted successfully!' : 'Failed to submit feedback. Please try again later.'}
               </p>
             )}
+            {errorMessage && (
+                <p style={{ color: 'red' }}>{errorMessage}</p>
+            )}
             <form onSubmit={handleSubmit}>
                 <label>
                     Feedback Type:
-                    <select>
-                        <option></option>
-                        <option></option>
-                        <option></option>
+                    <select value={feedbackType} onChange={(e) => setFeedbackType(e.target.value)}>
+                        <option value="">Select a feedback type</option>
+                        <option value="Account Issue">Account Issue</option>
+                        <option value="Bug">Bug/Feature Issue</option>
+                        <option value="Feature Request">Feature Request</option>
+                        <option value="Other">Other</option>
                     </select>
                 </label>
                 <br />
