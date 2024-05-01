@@ -50,7 +50,7 @@ export default function DailyLog() {
         fetchData();
         const timer = setTimeout(() => {
             setRendered(true);
-        }, 1000);
+        }, 1200);
         return () => clearTimeout(timer);
     }, [rendered]);
 
