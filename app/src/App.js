@@ -17,12 +17,12 @@ import { useAuth0 } from "@auth0/auth0-react";
 import LogHistory from './components/DailyLogComponents/LogHistory.js';
 
 
-const baseUrl = process.env.REACT_APP_BASEURL;
+// const baseUrl = process.env.REACT_APP_BASEURL;
 
 
 
 const App = () => {
-const { user, isAuthenticated, isLoading } = useAuth0();
+const {isAuthenticated} = useAuth0();
   if (!isAuthenticated) {
     return <div><AuthLogin /> </div>;
   }
