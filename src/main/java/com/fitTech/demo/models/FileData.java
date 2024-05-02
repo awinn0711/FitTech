@@ -20,7 +20,7 @@ public class FileData {
     private String type;
 
     @Lob
-    @Column(columnDefinition = "LONGBLOB")
+    @Column(columnDefinition = "bytea")
     private byte[] data;
 
     public FileData() {
